@@ -3,7 +3,7 @@
 namespace Dcat\Admin\Http\Controllers;
 
 use Dcat\Admin\Layout\Content;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {

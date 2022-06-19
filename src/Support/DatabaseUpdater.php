@@ -32,7 +32,7 @@ class DatabaseUpdater
 
         Model::unguard();
 
-        $this->transaction(function () use ($object, $callback) {
+        // $this->transaction(function () use ($object, $callback) {
             if ($object instanceof Migration) {
                 $object->up();
             } elseif ($object instanceof Seeder) {
@@ -40,7 +40,7 @@ class DatabaseUpdater
             }
 
             $callback && $callback();
-        });
+        // });
 
         Model::reguard();
 
@@ -62,13 +62,13 @@ class DatabaseUpdater
 
         Model::unguard();
 
-        $this->transaction(function () use ($object, $callback) {
+        // $this->transaction(function () use ($object, $callback) {
             if ($object instanceof Migration) {
                 $object->down();
             }
 
             $callback && $callback();
-        });
+        // });
 
         Model::reguard();
 

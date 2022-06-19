@@ -40,7 +40,7 @@ class AdminTablesSeeder extends Seeder
         Permission::insert([
             [
                 'id'          => 1,
-                'name'        => 'Auth management',
+                'name'        => '系统权限',
                 'slug'        => 'auth-management',
                 'http_method' => '',
                 'http_path'   => '',
@@ -50,7 +50,7 @@ class AdminTablesSeeder extends Seeder
             ],
             [
                 'id'          => 2,
-                'name'        => 'Users',
+                'name'        => '管理员',
                 'slug'        => 'users',
                 'http_method' => '',
                 'http_path'   => '/auth/users*',
@@ -60,7 +60,7 @@ class AdminTablesSeeder extends Seeder
             ],
             [
                 'id'          => 3,
-                'name'        => 'Roles',
+                'name'        => '角色',
                 'slug'        => 'roles',
                 'http_method' => '',
                 'http_path'   => '/auth/roles*',
@@ -70,7 +70,7 @@ class AdminTablesSeeder extends Seeder
             ],
             [
                 'id'          => 4,
-                'name'        => 'Permissions',
+                'name'        => '权限',
                 'slug'        => 'permissions',
                 'http_method' => '',
                 'http_path'   => '/auth/permissions*',
@@ -80,7 +80,7 @@ class AdminTablesSeeder extends Seeder
             ],
             [
                 'id'          => 5,
-                'name'        => 'Menu',
+                'name'        => '菜单',
                 'slug'        => 'menu',
                 'http_method' => '',
                 'http_path'   => '/auth/menu*',
@@ -90,7 +90,7 @@ class AdminTablesSeeder extends Seeder
             ],
             [
                 'id'          => 6,
-                'name'        => 'Extension',
+                'name'        => '扩展',
                 'slug'        => 'extension',
                 'http_method' => '',
                 'http_path'   => '/auth/extensions*',
@@ -100,7 +100,7 @@ class AdminTablesSeeder extends Seeder
             ],
         ]);
 
-//        Role::first()->permissions()->save(Permission::first());
+        // Role::first()->permissions()->save(Permission::first());
 
         // add default menus.
         Menu::truncate();
@@ -108,7 +108,7 @@ class AdminTablesSeeder extends Seeder
             [
                 'parent_id'     => 0,
                 'order'         => 1,
-                'title'         => 'Index',
+                'title'         => '仪表盘',
                 'icon'          => 'feather icon-bar-chart-2',
                 'uri'           => '/',
                 'created_at'    => $createdAt,
@@ -116,7 +116,7 @@ class AdminTablesSeeder extends Seeder
             [
                 'parent_id'     => 0,
                 'order'         => 2,
-                'title'         => 'Admin',
+                'title'         => '系统权限',
                 'icon'          => 'feather icon-settings',
                 'uri'           => '',
                 'created_at'    => $createdAt,
@@ -124,7 +124,7 @@ class AdminTablesSeeder extends Seeder
             [
                 'parent_id'     => 2,
                 'order'         => 3,
-                'title'         => 'Users',
+                'title'         => '管理员',
                 'icon'          => '',
                 'uri'           => 'auth/users',
                 'created_at'    => $createdAt,
@@ -132,7 +132,7 @@ class AdminTablesSeeder extends Seeder
             [
                 'parent_id'     => 2,
                 'order'         => 4,
-                'title'         => 'Roles',
+                'title'         => '角色',
                 'icon'          => '',
                 'uri'           => 'auth/roles',
                 'created_at'    => $createdAt,
@@ -140,7 +140,7 @@ class AdminTablesSeeder extends Seeder
             [
                 'parent_id'     => 2,
                 'order'         => 5,
-                'title'         => 'Permission',
+                'title'         => '权限',
                 'icon'          => '',
                 'uri'           => 'auth/permissions',
                 'created_at'    => $createdAt,
@@ -148,7 +148,7 @@ class AdminTablesSeeder extends Seeder
             [
                 'parent_id'     => 2,
                 'order'         => 6,
-                'title'         => 'Menu',
+                'title'         => '菜单',
                 'icon'          => '',
                 'uri'           => 'auth/menu',
                 'created_at'    => $createdAt,
@@ -156,7 +156,7 @@ class AdminTablesSeeder extends Seeder
             [
                 'parent_id'     => 2,
                 'order'         => 7,
-                'title'         => 'Extensions',
+                'title'         => '扩展',
                 'icon'          => '',
                 'uri'           => 'auth/extensions',
                 'created_at'    => $createdAt,

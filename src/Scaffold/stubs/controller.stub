@@ -11,6 +11,12 @@ use Dcat\Admin\Http\Controllers\AdminController;
 class DummyClass extends AdminController
 {
     /**
+     * Set the language file path.
+     *
+     */
+    protected $translation = '';
+
+    /**
      * Make a grid builder.
      *
      * @return Grid

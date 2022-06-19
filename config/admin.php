@@ -15,6 +15,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | dcat-admin html title
+    |--------------------------------------------------------------------------
+    |
+    | Html title for all pages.
+    |
+    */
+    'title' => 'Admin',
+
+    /*
+    |--------------------------------------------------------------------------
     | dcat-admin logo
     |--------------------------------------------------------------------------
     |
@@ -87,16 +97,6 @@ return [
     |
     */
     'directory' => app_path('Admin'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | dcat-admin html title
-    |--------------------------------------------------------------------------
-    |
-    | Html title for all pages.
-    |
-    */
-    'title' => 'Admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -363,6 +363,6 @@ return [
     'extension' => [
         // When you use command `php artisan admin:ext-make` to generate extensions,
         // the extension files will be generated in this directory.
-        'dir' => base_path('dcat-admin-extensions'),
+        'dir' => base_path('addons'),
     ],
 ];
