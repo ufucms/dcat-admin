@@ -89,12 +89,34 @@ class InstallCommand extends Command
         $this->makeDir('Controllers');
         $this->makeDir('Metrics/Examples');
 
+        $this->createAddonsController();
         $this->createHomeController();
         $this->createAuthController();
         $this->createMetricCards();
 
         $this->createBootstrapFile();
         $this->createRoutesFile();
+    }
+
+    /**
+     * Create AddonsController.
+     *
+     * @return void
+     */
+    public function createAddonsController()
+    {
+        $addonsController = $this->directory.'/Controllers/AddonsController.php';
+        $contents = $this->getStub('AddonsController');
+
+        $this->laravel['files']->put(
+            $addonsController,
+            str_replace(
+                ['DummyNamespace'],
+                [$this->namespace('Controllers')],
+                $contents
+            )
+        );
+        $this->line('<info>AddonsController file was created:</info> '.str_replace(base_path(), '', $addonsController));
     }
 
     /**
@@ -202,7 +224,9 @@ class InstallCommand extends Command
         $file = $this->directory.'/routes.php';
 
         $contents = $this->getStub('routes');
-        $this->laravel['files']->put($file, str_replace('DummyNamespace', $this->namespace('Controllers'), $contents));
+
+        $appName = strtolower($this->directory);
+        $this->laravel['files']->put($file, str_replace(['DummyNamespace', 'appName'], [$this->namespace('Controllers'), $appName], $contents));
         $this->line('<info>Routes file was created:</info> '.str_replace(base_path(), '', $file));
     }
 

@@ -4,12 +4,12 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Dcat\Admin\Admin;
 
-Admin::routes();
+Admin::routes(config('appName.route.prefix'));
 
 Route::group([
-    'prefix'     => config('admin.route.prefix'),
-    'namespace'  => config('admin.route.namespace'),
-    'middleware' => config('admin.route.middleware'),
+    'prefix'     => config('appName.route.prefix'),
+    'namespace'  => config('appName.route.namespace'),
+    'middleware' => config('appName.route.middleware'),
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');

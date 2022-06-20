@@ -570,14 +570,14 @@ class Admin
      *
      * @return void
      */
-    public static function routes()
+    public static function routes($appName='admin')
     {
         $attributes = [
-            'prefix'     => config('admin.route.prefix'),
-            'middleware' => config('admin.route.middleware'),
+            'prefix'     => config("{$appName}.route.prefix"),
+            'middleware' => config("{$appName}.route.middleware"),
         ];
 
-        if (config('admin.auth.enable', true)) {
+        if (config("{$appName}.auth.enable", true)) {
             app('router')->group($attributes, function ($router) {
                 /* @var \Illuminate\Routing\Router $router */
                 $router->namespace('Dcat\Admin\Http\Controllers')->group(function ($router) {
@@ -585,7 +585,7 @@ class Admin
                     $router->resource('auth/users', 'UserController');
                     $router->resource('auth/menu', 'MenuController', ['except' => ['create', 'show']]);
 
-                    if (config('admin.permission.enable')) {
+                    if (config("{$appName}.permission.enable")) {
                         $router->resource('auth/roles', 'RoleController');
                         $router->resource('auth/permissions', 'PermissionController');
                     }
@@ -593,7 +593,7 @@ class Admin
 
                 $router->resource('auth/extensions', 'Dcat\Admin\Http\Controllers\ExtensionController', ['only' => ['index', 'store', 'update']]);
 
-                $authController = config('admin.auth.controller', AuthController::class);
+                $authController = config("{$appName}.auth.controller", AuthController::class);
 
                 $router->get('auth/login', $authController.'@getLogin');
                 $router->post('auth/login', $authController.'@postLogin');
