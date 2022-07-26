@@ -28,7 +28,7 @@ return [
         'edit'     => '编辑',
         'detail'   => '详细',
         'create'   => '创建',
-        'root'     => '顶级',
+        'root'     => '顶级分类',
         'scaffold' => '代码生成器',
     ],
     'options' => [

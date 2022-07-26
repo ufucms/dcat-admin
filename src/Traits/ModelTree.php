@@ -282,16 +282,23 @@ trait ModelTree
     /**
      * Get options for Select field in form.
      *
+     * @param  array  $where
      * @param  \Closure|null  $closure
-     * @param  string  $rootText
+     * @param  string|bool  $rootText
      * @return array
      */
-    public static function selectOptions(\Closure $closure = null, $rootText = null)
+    public static function selectOptions(array $where = [], \Closure $closure = null, $rootText = 'root')
     {
-        $rootText = $rootText ?: admin_trans_label('root');
+        $nodes = [];
+        if($where){
+            $nodes = static::where($where)->get()->toArray();
+        }
+        $options = (new static())->withQuery($closure)->buildSelectOptions($nodes);
 
-        $options = (new static())->withQuery($closure)->buildSelectOptions();
-
+        if(!$rootText){
+            return collect($options)->all();
+        }
+        $rootText = admin_trans_label($rootText);
         return collect($options)->prepend($rootText, 0)->all();
     }
 

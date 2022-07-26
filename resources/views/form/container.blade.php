@@ -4,6 +4,7 @@
         <div class="pull-right">{!! $form->renderTools() !!}</div>
     </div>
 @endif
+
 <div class="box-body" {!! $tabObj->isEmpty() && !$form->hasRows() ? 'style="margin-top: 6px"' : '' !!} >
     @if(!$tabObj->isEmpty())
         @include('admin::form.tab', compact('tabObj', 'form'))

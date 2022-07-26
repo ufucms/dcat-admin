@@ -23,6 +23,8 @@ export default class DialogForm {
                 submit: Dcat.lang['submit'] || 'Submit',
                 reset: Dcat.lang['reset'] || 'Reset',
             },
+            // 弹窗遮罩
+            shade: false,
 
             // get参数名称
             query: '',
@@ -159,6 +161,7 @@ export default class DialogForm {
                     })(options.area),
                 content: template,
                 title: options.title,
+                shade: options.shade,
                 yes: function () {
                     self.submit()
                 },
