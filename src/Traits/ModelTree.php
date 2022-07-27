@@ -400,8 +400,6 @@ trait ModelTree
 
                 return false;
             }
-
-            return $branch;
         });
 
         static::deleting(function ($model) {
