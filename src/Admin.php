@@ -578,9 +578,9 @@ class Admin
         ];
 
         if (config("{$appName}.auth.enable", true)) {
-            app('router')->group($attributes, function ($router) {
+            app('router')->group($attributes, function ($router) use($appName) {
                 /* @var \Illuminate\Routing\Router $router */
-                $router->namespace('Dcat\Admin\Http\Controllers')->group(function ($router) {
+                $router->namespace('Dcat\Admin\Http\Controllers')->group(function ($router) use($appName) {
                     /* @var \Illuminate\Routing\Router $router */
                     $router->resource('auth/users', 'UserController');
                     $router->resource('auth/menu', 'MenuController', ['except' => ['create', 'show']]);
