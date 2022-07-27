@@ -112,6 +112,25 @@ trait ModelTree
     }
 
     /**
+     * 根据条件获取分类树
+     *
+     * @param  array  $where
+     * @param  array  $fields
+     * @return array
+     */
+    public function whereToTree(array $where = null, array $fields = null)
+    {
+        $nodes = [];
+        if ($where) {
+            if ($fields === null) {
+                $fields = '*';
+            }
+            $nodes = $this->callQueryCallbacks(new static())->where($where)->select($fields)->orderBy($this->getOrderColumn(), 'asc')->get()->toArray();
+        }
+        return $this->toTree($nodes);
+    }
+
+    /**
      * Get all elements.
      *
      * @return static[]|\Illuminate\Support\Collection
