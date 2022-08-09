@@ -176,7 +176,7 @@ class RadialBar extends Card
 HTML;
         }
 
-        $justifyClass = $this->chartPullRight ? 'justify-content-between' : 'justify-content-center';
+        $justifyClass = $this->chartPullRight ? 'justify-content-between overflow-hidden' : 'justify-content-center';
 
         return <<<HTML
 <div class="card-content">
