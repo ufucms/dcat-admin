@@ -109,6 +109,6 @@ class Administrator extends Model implements AuthenticatableContract
      */
     public static function getDefaultId()
     {
-        return (new static)->setDefaultId()->$default_id;
+        return (new static)->setDefaultId()::$default_id;
     }
 }
