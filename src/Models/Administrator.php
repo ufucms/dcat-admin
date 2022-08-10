@@ -22,7 +22,7 @@ class Administrator extends Model implements AuthenticatableContract
         HasPermissions,
         HasDateTimeFormatter;
 
-    const DEFAULT_ID = 1;
+    public static $default_id = 1;
 
     protected $fillable = ['username', 'password', 'name', 'avatar'];
 
@@ -35,16 +35,26 @@ class Administrator extends Model implements AuthenticatableContract
     {
         $this->init();
 
+        $this->setDefaultId();
+
         parent::__construct($attributes);
     }
 
     protected function init()
     {
+
         $connection = config('admin.database.connection') ?: config('database.default');
 
         $this->setConnection($connection);
 
         $this->setTable(config('admin.database.users_table'));
+    }
+
+    protected function setDefaultId()
+    {
+        self::$default_id = config('admin.default_id') ?: 1;
+
+        return $this;
     }
 
     /**
@@ -90,5 +100,15 @@ class Administrator extends Model implements AuthenticatableContract
     public function canSeeMenu($menu)
     {
         return true;
+    }
+
+    /**
+     * Get default_id.
+     *
+     * @return mixed|string
+     */
+    public static function getDefaultId()
+    {
+        return $this->setDefaultId()->$default_id;
     }
 }

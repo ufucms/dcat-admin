@@ -59,7 +59,7 @@ class UserController extends AdminController
             $grid->disableEditButton();
 
             $grid->actions(function (Grid\Displayers\Actions $actions) {
-                if ($actions->getKey() == AdministratorModel::DEFAULT_ID) {
+                if ($actions->getKey() == AdministratorModel::getDefaultId()) {
                     $actions->disableDelete();
                 }
             });
@@ -169,7 +169,7 @@ class UserController extends AdminController
             $form->display('created_at', trans('admin.created_at'));
             $form->display('updated_at', trans('admin.updated_at'));
 
-            if ($id == AdministratorModel::DEFAULT_ID) {
+            if ($id == AdministratorModel::getDefaultId()) {
                 $form->disableDeleteButton();
             }
         })->saving(function (Form $form) {
@@ -185,7 +185,7 @@ class UserController extends AdminController
 
     public function destroy($id)
     {
-        if (in_array(AdministratorModel::DEFAULT_ID, Helper::array($id))) {
+        if (in_array(AdministratorModel::getDefaultId(), Helper::array($id))) {
             Permission::error();
         }
 
