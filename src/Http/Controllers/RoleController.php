@@ -65,6 +65,11 @@ class RoleController extends AdminController
 
             $show->field('created_at');
             $show->field('updated_at');
+            
+            $show->panel()->tools(function ($tools) {
+                // 显示快捷编辑按钮
+                $tools->showQuickEdit();
+            });
 
             $roleModel = config('admin.database.roles_model');
             if ($show->getKey() == $roleModel::ADMINISTRATOR_ID) {

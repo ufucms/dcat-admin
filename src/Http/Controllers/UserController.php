@@ -115,6 +115,11 @@ class UserController extends AdminController
 
             $show->field('created_at');
             $show->field('updated_at');
+            
+            $show->panel()->tools(function ($tools) {
+                // 显示快捷编辑按钮
+                $tools->showQuickEdit();
+            });
         });
     }
 

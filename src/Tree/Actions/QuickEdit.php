@@ -15,8 +15,9 @@ class QuickEdit extends RowAction
 
         Form::dialog(trans('admin.edit'))
             ->click('.tree-quick-edit')
-            ->success('Dcat.reload()')
-            ->dimensions($width, $height);
+            ->dimensions($width, $height)
+            ->forceRefresh()
+            ->success('Dcat.reload()');
 
         return <<<HTML
 <a href="javascript:void(0);" data-url="{$this->resource()}/{$this->getKey()}/edit" class="tree-quick-edit"><i class="feather icon-edit"></i>&nbsp;</a>
