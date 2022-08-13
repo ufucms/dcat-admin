@@ -61,6 +61,9 @@ class Admin
         'LEFT_SIDEBAR_MENU_TOP' => 'ADMIN_LEFT_SIDEBAR_MENU_TOP',
         // 菜单栏底部
         'LEFT_SIDEBAR_MENU_BOTTOM' => 'ADMIN_LEFT_SIDEBAR_MENU_BOTTOM',
+
+        // 往footer内部输入内容
+        'FOOTER_MAIN_INNER' => 'ADMIN_FOOTER_MAIN_INNER',
     ];
 
     private static $defaultPjaxContainerId = 'pjax-container';
