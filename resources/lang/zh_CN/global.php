@@ -24,12 +24,13 @@ return [
         'type'                  => '类型',
     ],
     'labels' => [
-        'list'     => '列表',
-        'edit'     => '编辑',
-        'detail'   => '详细',
-        'create'   => '创建',
-        'root'     => '顶级分类',
-        'scaffold' => '代码生成器',
+        'list'      => '列表',
+        'edit'      => '编辑',
+        'detail'    => '详细',
+        'create'    => '创建',
+        'root'      => '顶级分类',
+        'scaffold'  => '代码生成器',
+        'dashboard' => '仪表盘',
     ],
     'options' => [
         //
