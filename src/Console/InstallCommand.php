@@ -105,7 +105,7 @@ class InstallCommand extends Command
      */
     public function createAddonsController()
     {
-        $addonsController = $this->directory.'/Controllers/AddonsController.php';
+        $addonsController = app_path('Http').'/Controllers/AddonsController.php';
         $contents = $this->getStub('AddonsController');
 
         $this->laravel['files']->put(
@@ -225,7 +225,8 @@ class InstallCommand extends Command
 
         $contents = $this->getStub('routes');
 
-        $appName = strtolower($this->directory);
+        $dirArr  = explode(DIRECTORY_SEPARATOR, strtolower($this->directory));
+        $appName = end($dirArr); 
         $this->laravel['files']->put($file, str_replace(['DummyNamespace', 'appName'], [$this->namespace('Controllers'), $appName], $contents));
         $this->line('<info>Routes file was created:</info> '.str_replace(base_path(), '', $file));
     }
