@@ -10,6 +10,12 @@
         </span>
     </a>
     <div class="dropdown-menu dropdown-menu-right">
+        <a target="_blank" href="{{ url('/') }}" class="dropdown-item">
+            <i class="feather icon-monitor"></i> {{ trans('admin.home') }}
+        </a>
+
+        <div class="dropdown-divider"></div>
+        
         <a href="{{ admin_url('auth/setting') }}" class="dropdown-item">
             <i class="feather icon-user"></i> {{ trans('admin.setting') }}
         </a>
