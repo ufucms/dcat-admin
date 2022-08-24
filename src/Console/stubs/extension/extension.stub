@@ -27,13 +27,6 @@ class {className}ServiceProvider extends ServiceProvider
 
 		//
 		{registerTheme}
-		
-		//注册前台路由
-		$this->registerRoutes();
-	}
-
-	public function registerRoutes(){
-		//
 	}
 
 	public function settingForm()
