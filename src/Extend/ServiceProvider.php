@@ -414,12 +414,10 @@ abstract class ServiceProvider extends LaravelServiceProvider
      */
     public function registerApiRoutes($callback)
     {
-        app('router')->routes(function ($router) use ($callback) {
-            $router->group([
-                'prefix'     => 'api',
-                'middleware' => 'api',
-            ], $callback);
-        });
+        app('router')->group([
+            'prefix'     => 'api',
+            'middleware' => 'api',
+        ], $callback);
     }
 
     /**
@@ -429,11 +427,9 @@ abstract class ServiceProvider extends LaravelServiceProvider
      */
     public function registerWebRoutes($callback)
     {
-        app('router')->routes(function ($router) use ($callback) {
-            $router->group([
-                'middleware' => 'web',
-            ], $callback);
-        });
+        app('router')->group([
+            'middleware' => 'web',
+        ], $callback);
     }
 
     /**
