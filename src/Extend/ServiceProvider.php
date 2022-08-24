@@ -107,8 +107,16 @@ abstract class ServiceProvider extends LaravelServiceProvider
             $this->loadTranslationsFrom($lang, $this->getName());
         }
 
-        if ($routes = $this->getRoutes()) {
-            $this->registerRoutes($routes);
+        if ($adminRoutes = $this->getAdminRoutes()) {
+            $this->registerAdminRoutes($adminRoutes);
+        }
+
+        if ($apiRoutes = $this->getApiRoutes()) {
+            $this->registerApiRoutes($apiRoutes);
+        }
+
+        if ($webRoutes = $this->getWebRoutes()) {
+            $this->registerWebRoutes($webRoutes);
         }
 
         if ($this->middleware()) {
@@ -385,16 +393,45 @@ abstract class ServiceProvider extends LaravelServiceProvider
     }
 
     /**
-     * 注册路由.
+     * 注册Admin路由.
      *
      * @param $callback
      */
-    public function registerRoutes($callback)
+    public function registerAdminRoutes($callback)
     {
         Admin::app()->routes(function ($router) use ($callback) {
             $router->group([
                 'prefix'     => config('admin.route.prefix'),
                 'middleware' => config('admin.route.middleware'),
+            ], $callback);
+        });
+    }
+
+    /**
+     * 注册Api路由.
+     *
+     * @param $callback
+     */
+    public function registerApiRoutes($callback)
+    {
+        app('router')->routes(function ($router) use ($callback) {
+            $router->group([
+                'prefix'     => 'api',
+                'middleware' => 'api',
+            ], $callback);
+        });
+    }
+
+    /**
+     * 注册Web路由.
+     *
+     * @param $callback
+     */
+    public function registerWebRoutes($callback)
+    {
+        app('router')->routes(function ($router) use ($callback) {
+            $router->group([
+                'middleware' => 'web',
             ], $callback);
         });
     }
@@ -478,15 +515,43 @@ abstract class ServiceProvider extends LaravelServiceProvider
     }
 
     /**
-     * 获取路由地址.
+     * 获取admin路由地址.
      *
      * @return string
      *
      * @throws \ReflectionException
      */
-    final public function getRoutes()
+    final public function getAdminRoutes()
     {
-        $path = $this->path('src/Http/routes.php');
+        $path = $this->path('src/Http/Routes/admin.php');
+
+        return is_file($path) ? $path : null;
+    }
+
+    /**
+     * 获取api路由地址.
+     *
+     * @return string
+     *
+     * @throws \ReflectionException
+     */
+    final public function getApiRoutes()
+    {
+        $path = $this->path('src/Http/Routes/api.php');
+
+        return is_file($path) ? $path : null;
+    }
+
+    /**
+     * 获取web路由地址.
+     *
+     * @return string
+     *
+     * @throws \ReflectionException
+     */
+    final public function getWebRoutes()
+    {
+        $path = $this->path('src/Http/Routes/web.php');
 
         return is_file($path) ? $path : null;
     }
