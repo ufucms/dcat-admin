@@ -1,6 +1,6 @@
 <?php
 
-namespace DummyNamespace;
+namespace {namespace}\Http\Controllers;
 
 use Dcat\Admin\Http\Controllers\AddonsController;
 use Illuminate\Http\Request;
