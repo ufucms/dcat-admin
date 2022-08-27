@@ -204,6 +204,14 @@ TREE;
         );
         $this->putFile('composer.json', $composerContents);
 
+        // make setting
+        $settingContents = str_replace(
+            ['{namespace}'],
+            [$this->namespace],
+            file_get_contents(__DIR__.'/stubs/extension/setting.stub')
+        );
+        $this->putFile('src/Setting.php', $settingContents);
+
         $basePackage = Helper::slug(basename($this->package));
 
         // make base
