@@ -252,7 +252,7 @@ TREE;
                 file_get_contents(__DIR__.'/stubs/extension/controllers/web/WebController.stub')
             );
             $this->putFile("src/Http/Controllers/Web/WebController.php", $webContents);
-\
+            
             $apiContents = str_replace(
                 ['{namespace}'],
                 [$this->namespace],
