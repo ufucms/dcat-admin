@@ -204,16 +204,16 @@ TREE;
         );
         $this->putFile('composer.json', $composerContents);
 
-        // make composer.json
-        $settingContents = str_replace(
-            ['{namespace}'],
-            [$this->namespace],
-            file_get_contents(__DIR__.'/stubs/extension/setting.stub')
-        );
-        $this->putFile('src/Setting.php', $settingContents);
-
         $basePackage = Helper::slug(basename($this->package));
 
+        // make base
+        $baseContents = str_replace(
+            ['{namespace}'],
+            [$this->namespace],
+            file_get_contents(__DIR__.'/stubs/extension/BaseController.stub')
+        );
+        $this->putFile('src/Http/Controllers/BaseController.php', $baseContents);
+        
         // make class
         $classContents = str_replace(
             ['{namespace}', '{className}', '{title}', '{path}', '{basePackage}', '{property}', '{registerTheme}'],
@@ -246,6 +246,20 @@ TREE;
             );
             $this->putFile('resources/views/index.blade.php', $viewContents);
 
+            $webContents = str_replace(
+                ['{namespace}'],
+                [$this->namespace],
+                file_get_contents(__DIR__.'/stubs/extension/controllers/web/WebController.stub')
+            );
+            $this->putFile("src/Http/Controllers/Web/WebController.php", $webContents);
+\
+            $apiContents = str_replace(
+                ['{namespace}'],
+                [$this->namespace],
+                file_get_contents(__DIR__.'/stubs/extension/controllers/api/ApiController.stub')
+            );
+            $this->putFile("src/Http/Controllers/Api/ApiController.php", $apiContents);
+
             // make routes
             $routesContent = str_replace(
                 ['{namespace}', '{className}', '{path}'],
@@ -255,15 +269,15 @@ TREE;
             $this->putFile('src/Http/Routes/admin.php', $routesContent);
 
             $routesContent = str_replace(
-                ['{namespace}', '{className}', '{path}'],
-                [$this->namespace, $this->className, $basePackage],
+                ['{namespace}', '{path}'],
+                [$this->namespace, $basePackage],
                 file_get_contents(__DIR__.'/stubs/extension/routes/web.stub')
             );
             $this->putFile('src/Http/Routes/web.php', $routesContent);
             
             $routesContent = str_replace(
-                ['{namespace}', '{className}', '{path}'],
-                [$this->namespace, $this->className, $basePackage],
+                ['{namespace}', '{path}'],
+                [$this->namespace, $basePackage],
                 file_get_contents(__DIR__.'/stubs/extension/routes/api.stub')
             );
             $this->putFile('src/Http/Routes/api.php', $routesContent);

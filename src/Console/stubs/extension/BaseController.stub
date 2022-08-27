@@ -1,0 +1,12 @@
+<?php
+
+namespace DummyNamespace;
+
+use Dcat\Admin\Http\Controllers\AddonsController;
+use Illuminate\Http\Request;
+
+class BaseController extends AddonsController
+{
+
+    
+}

@@ -3,4 +3,4 @@
 use {namespace}\Http\Controllers\Api;
 use Illuminate\Support\Facades\Route;
 
-Route::get('{path}', Api\{className}Controller::class.'@index');
+Route::get('{path}', [Api\ApiController::class, 'index']);

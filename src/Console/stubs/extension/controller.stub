@@ -4,9 +4,8 @@ namespace {namespace}\Http\Controllers;
 
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Admin;
-use Illuminate\Routing\Controller;
 
-class {className}Controller extends Controller
+class {className}Controller extends BaseController
 {
     public function index(Content $content)
     {

@@ -89,36 +89,12 @@ class InstallCommand extends Command
         $this->makeDir('Controllers');
         $this->makeDir('Metrics/Examples');
 
-        $this->createAddonsController();
         $this->createHomeController();
         $this->createAuthController();
         $this->createMetricCards();
 
         $this->createBootstrapFile();
         $this->createRoutesFile();
-    }
-
-    /**
-     * Create AddonsController.
-     *
-     * @return void
-     */
-    public function createAddonsController()
-    {
-        $addonsController = app_path('Http').'/Controllers/AddonsController.php';
-        if(!is_file($addonsController)){
-            $contents = $this->getStub('AddonsController');
-
-            $this->laravel['files']->put(
-                $addonsController,
-                str_replace(
-                    ['DummyNamespace'],
-                    [$this->namespace('Controllers')],
-                    $contents
-                )
-            );
-            $this->line('<info>AddonsController file was created:</info> '.str_replace(base_path(), '', $addonsController));
-        }
     }
 
     /**

@@ -3,4 +3,4 @@
 use {namespace}\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
-Route::get('{path}', Controllers\{className}Controller::class.'@index');
+Route::get('{path}', [Controllers\{className}Controller::class, 'index']);

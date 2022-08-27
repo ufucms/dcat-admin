@@ -1,0 +1,16 @@
+<?php
+
+namespace {namespace}\Http\Controllers\Api;
+
+use {namespace}\Http\Controllers\BaseController;
+use Illuminate\Http\Request;
+
+class ApiController extends BaseController
+{
+	public function index(Request $request)
+	{
+		// return $this->fail([], '请求接口出错')
+
+		// return $this->success([], '获取数据成功')
+	}
+}

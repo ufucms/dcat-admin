@@ -1,0 +1,15 @@
+<?php
+
+namespace {namespace}\Http\Controllers\Web;
+
+use {namespace}\Http\Controllers\BaseController;
+use Illuminate\Http\Request;
+
+class WebController extends BaseController
+{
+	public function index(Request $request)
+	{
+		// code...
+	}
+    
+}

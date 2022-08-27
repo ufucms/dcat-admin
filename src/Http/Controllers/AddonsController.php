@@ -1,19 +1,11 @@
 <?php
 
-namespace DummyNamespace;
+namespace Dcat\Admin\Http\Controllers;
 
-use Dcat\Admin\Http\Controllers\AdminController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class AddonController extends AdminController
+class AddonsController extends Controller
 {
-
-    public function __construct(Request $request)
-    {
-        admin_js(asset('assets/js/app.js'));
-        admin_css(asset('assets/css/app.css'));
-    }
-
     /**
      * $msg   返回提示消息
      * $data  返回数据
