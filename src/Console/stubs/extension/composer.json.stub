@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "dcat/laravel-admin": "~2.0"
+        "ufucms/laravel-admin": "*"
     },
     "autoload": {
         "psr-4": {
