@@ -3,8 +3,9 @@
 return [
     'titles' => [
         'index'         => '主页',
+        'dashboard'     => '仪表盘',
         'admin'         => '系统',
-        'users'         => '管理员',
+        'admins'        => '管理员',
         'roles'         => '角色',
         'permission'    => '权限',
         'menu'          => '菜单',

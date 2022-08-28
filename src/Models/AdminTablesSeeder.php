@@ -3,6 +3,7 @@
 namespace Dcat\Admin\Models;
 
 use Illuminate\Database\Seeder;
+use Symfony\Component\Yaml\Yaml;
 
 class AdminTablesSeeder extends Seeder
 {
@@ -36,132 +37,107 @@ class AdminTablesSeeder extends Seeder
         Administrator::first()->roles()->save(Role::first());
 
         //create a permission
-        Permission::truncate();
-        Permission::insert([
-            [
-                'id'          => 1,
-                'name'        => '系统权限',
-                'slug'        => 'auth-management',
-                'http_method' => '',
-                'http_path'   => '',
+        $permissionYaml = Yaml::parseFile(config_path('admin-permission.yaml'));
+
+        $permission = [];
+        foreach ($permissionYaml as $k => $v) {
+            $id1 = ($k + 1);
+            $permission[] = [
+                'id'          => $id1,
                 'parent_id'   => 0,
-                'order'       => 1,
+                'name'        => $v['name'],
+                'slug'        => $v['slug'],
+                'http_method' => $v['http_method'],
+                'http_path'   => $v['http_path'],
+                'order'       => $v['order'],
                 'created_at'  => $createdAt,
-            ],
-            [
-                'id'          => 2,
-                'name'        => '管理员',
-                'slug'        => 'users',
-                'http_method' => '',
-                'http_path'   => '/auth/users*',
-                'parent_id'   => 1,
-                'order'       => 2,
-                'created_at'  => $createdAt,
-            ],
-            [
-                'id'          => 3,
-                'name'        => '角色',
-                'slug'        => 'roles',
-                'http_method' => '',
-                'http_path'   => '/auth/roles*',
-                'parent_id'   => 1,
-                'order'       => 3,
-                'created_at'  => $createdAt,
-            ],
-            [
-                'id'          => 4,
-                'name'        => '权限',
-                'slug'        => 'permissions',
-                'http_method' => '',
-                'http_path'   => '/auth/permissions*',
-                'parent_id'   => 1,
-                'order'       => 4,
-                'created_at'  => $createdAt,
-            ],
-            [
-                'id'          => 5,
-                'name'        => '菜单',
-                'slug'        => 'menu',
-                'http_method' => '',
-                'http_path'   => '/auth/menu*',
-                'parent_id'   => 1,
-                'order'       => 5,
-                'created_at'  => $createdAt,
-            ],
-            [
-                'id'          => 6,
-                'name'        => '扩展',
-                'slug'        => 'extension',
-                'http_method' => '',
-                'http_path'   => '/auth/extensions*',
-                'parent_id'   => 1,
-                'order'       => 6,
-                'created_at'  => $createdAt,
-            ],
-        ]);
+            ];
+
+            if(isset($v['children']) && $v['children']){
+                foreach ($v['children'] as $ke => $va) {
+                    $id2 = $id1 * pow(2, 8) | ($ke + 1);
+                    $permission[] = [
+                        'id'          => $id2,
+                        'parent_id'   => $id1,
+                        'name'        => $va['name'],
+                        'slug'        => $va['slug'],
+                        'http_method' => $va['http_method'],
+                        'http_path'   => $va['http_path'],
+                        'order'       => $va['order'],
+                        'created_at'  => $createdAt,
+                    ];
+
+                    if(isset($va['children']) && $va['children']){
+                        foreach ($va['children'] as $key => $val) {
+                            $id3 = $id2 * pow(2, 16) | ($key + 1);
+                            $permission[] = [
+                                'id'          => $id3,
+                                'parent_id'   => $id2,
+                                'name'        => $val['name'],
+                                'slug'        => $val['slug'],
+                                'http_method' => $val['http_method'],
+                                'http_path'   => $val['http_path'],
+                                'order'       => $val['order'],
+                                'created_at'  => $createdAt,
+                            ];
+                        }
+                    }
+                }
+            }
+        }
+        Permission::truncate();
+        Permission::insert($permission);
 
         // Role::first()->permissions()->save(Permission::first());
 
         // add default menus.
+        $menuYaml = Yaml::parseFile(config_path('admin-menu.yaml'));
+
+        $menu = [];
+        foreach ($menuYaml as $k => $v) {
+            $id1 = ($k + 1);
+            $menu[] = [
+                'id'         => $id1,
+                'parent_id'  => 0,
+                'title'      => $v['title'],
+                'icon'       => $v['icon'],
+                'uri'        => $v['uri'],
+                'order'      => $v['order'],
+                'created_at' => $createdAt,
+            ];
+
+            if(isset($v['children']) && $v['children']){
+                foreach ($v['children'] as $ke => $va) {
+                    $id2 = $id1 * pow(2, 8) | ($ke + 1);
+                    $menu[] = [
+                        'id'         => $id2,
+                        'parent_id'  => $id1,
+                        'title'      => $va['title'],
+                        'icon'       => $va['icon'],
+                        'uri'        => $va['uri'],
+                        'order'      => $va['order'],
+                        'created_at' => $createdAt,
+                    ];
+
+                    if(isset($va['children']) && $va['children']){
+                        foreach ($va['children'] as $key => $val) {
+                            $id3 = $id2 * pow(2, 16) | ($key + 1);
+                            $menu[] = [
+                                'id'         => $id3,
+                                'parent_id'  => $id2,
+                                'title'      => $val['title'],
+                                'icon'       => $val['icon'],
+                                'uri'        => $val['uri'],
+                                'order'      => $val['order'],
+                                'created_at' => $createdAt,
+                            ];
+                        }
+                    }
+                }
+            }
+        }
         Menu::truncate();
-        Menu::insert([
-            [
-                'parent_id'     => 0,
-                'order'         => 1,
-                'title'         => '仪表盘',
-                'icon'          => 'feather icon-bar-chart-2',
-                'uri'           => '/',
-                'created_at'    => $createdAt,
-            ],
-            [
-                'parent_id'     => 0,
-                'order'         => 2,
-                'title'         => '系统权限',
-                'icon'          => 'feather icon-settings',
-                'uri'           => '',
-                'created_at'    => $createdAt,
-            ],
-            [
-                'parent_id'     => 2,
-                'order'         => 3,
-                'title'         => '管理员',
-                'icon'          => '',
-                'uri'           => 'auth/users',
-                'created_at'    => $createdAt,
-            ],
-            [
-                'parent_id'     => 2,
-                'order'         => 4,
-                'title'         => '角色',
-                'icon'          => '',
-                'uri'           => 'auth/roles',
-                'created_at'    => $createdAt,
-            ],
-            [
-                'parent_id'     => 2,
-                'order'         => 5,
-                'title'         => '权限',
-                'icon'          => '',
-                'uri'           => 'auth/permissions',
-                'created_at'    => $createdAt,
-            ],
-            [
-                'parent_id'     => 2,
-                'order'         => 6,
-                'title'         => '菜单',
-                'icon'          => '',
-                'uri'           => 'auth/menu',
-                'created_at'    => $createdAt,
-            ],
-            [
-                'parent_id'     => 2,
-                'order'         => 7,
-                'title'         => '扩展',
-                'icon'          => '',
-                'uri'           => 'auth/extensions',
-                'created_at'    => $createdAt,
-            ],
-        ]);
+        Menu::insert($menu);
 
         (new Menu())->flushCache();
     }

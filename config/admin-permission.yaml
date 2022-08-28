@@ -1,0 +1,36 @@
+- name: '系统权限'
+  slug: 'auth-management'
+  http_method: ''
+  http_path: ''
+  order: '100'
+  children: 
+    - name: '管理员'
+      slug: 'admins'
+      http_method: ''
+      http_path: '/auth/admins*'
+      order: '100'
+      children: []
+    - name: '角色'
+      slug: 'roles'
+      http_method: ''
+      http_path: '/auth/roles*'
+      order: '100'
+      children: []
+    - name: '权限'
+      slug: 'permissions'
+      http_method: ''
+      http_path: '/auth/permissions*'
+      order: '100'
+      children: []
+    - name: '菜单'
+      slug: 'menu'
+      http_method: ''
+      http_path: '/auth/menu*'
+      order: '100'
+      children: []
+    - name: '扩展'
+      slug: 'extension'
+      http_method: ''
+      http_path: '/auth/extensions*'
+      order: '100'
+      children: []
