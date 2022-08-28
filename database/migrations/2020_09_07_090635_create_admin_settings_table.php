@@ -23,13 +23,14 @@ class CreateAdminSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->config('database.settings_table') ?: 'admin_settings', function (Blueprint $table) {
+        $engine = config('database.connections.mysql.engine') === null ? 'InnoDB' : config('database.connections.mysql.engine');
+        Schema::create($this->config('database.settings_table') ?: 'admin_settings', function (Blueprint $table) use($engine) {
             $table->string('slug', 100)->primary()->comment('设置项标识');
             $table->longText('value')->comment('值');
             $table->timestamp('created_at')->nullable()->index()->comment('创建时间');
             $table->timestamp('updated_at')->nullable()->index()->comment('更新时间');
 
-            $table->engine = "comment '管理-设置表'";
+            $table->engine = "{$engine} comment '管理-设置表'";
         });
     }
 
