@@ -254,9 +254,10 @@ TREE;
             );
             $this->putFile('resources/views/index.blade.php', $viewContents);
 
+            $addonsView = str_replace("\\", '.', strtolower($this->namespace));
             $webContents = str_replace(
-                ['{namespace}'],
-                [$this->namespace],
+                ['{namespace}', '{addonsView}'],
+                [$this->namespace, $addonsView],
                 file_get_contents(__DIR__.'/stubs/extension/controllers/web/WebController.stub')
             );
             $this->putFile("src/Http/Controllers/Web/WebController.php", $webContents);
