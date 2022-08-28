@@ -24,7 +24,7 @@ export default class DialogForm {
                 reset: Dcat.lang['reset'] || 'Reset',
             },
             // 弹窗遮罩
-            shade: false,
+            shade: .3,
 
             // get参数名称
             query: '',

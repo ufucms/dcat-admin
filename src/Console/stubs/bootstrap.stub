@@ -24,7 +24,7 @@ use Dcat\Admin\Show;
  * Admin::js('/packages/prettydocs/js/main.js');
  *
  */
-Admin::script(<<<JS
+/*Admin::script(<<<JS
     Dcat.ready(function () {
         layer.config({
             maxmin: true,
@@ -32,4 +32,4 @@ Admin::script(<<<JS
             shade: 0.3,
         })
     })
-JS);
+JS);*/

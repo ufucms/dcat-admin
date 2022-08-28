@@ -85,7 +85,7 @@ function listen(Dcat) {
         Dcat.NP.configure({parent: '.app-content'});
 
         // layer弹窗设置
-        layer.config({maxmin: true, moveOut: true, shade: false});
+        layer.config({maxmin: true, moveOut: true, shade: .3});
 
         //////////////////////////////////////////////////////////
 

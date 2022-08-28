@@ -23,6 +23,7 @@ class DialogForm
     protected $options = [
         'title'          => 'Form',
         'area'           => ['700px', '670px'],
+        'shade'          => .3,
         'defaultUrl'     => null,
         'buttonSelector' => null,
         'query'          => null,
