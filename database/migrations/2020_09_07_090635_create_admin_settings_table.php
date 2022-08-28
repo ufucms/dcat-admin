@@ -24,9 +24,12 @@ class CreateAdminSettingsTable extends Migration
     public function up()
     {
         Schema::create($this->config('database.settings_table') ?: 'admin_settings', function (Blueprint $table) {
-            $table->string('slug', 100)->primary();
-            $table->longText('value');
-            $table->timestamps();
+            $table->string('slug', 100)->primary()->comment('设置项标识');
+            $table->longText('value')->comment('值');
+            $table->timestamp('created_at')->nullable()->index()->comment('创建时间');
+            $table->timestamp('updated_at')->nullable()->index()->comment('更新时间');
+
+            $table->engine = "comment '管理-设置表'";
         });
     }
 

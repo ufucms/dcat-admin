@@ -25,26 +25,27 @@ class CreateAdminExtensionsTable extends Migration
     {
         Schema::create($this->config('database.extensions_table') ?: 'admin_extensions', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->string('name', 100)->unique();
-            $table->string('version', 20)->default('');
-            $table->tinyInteger('is_enabled')->default(0);
-            $table->text('options')->nullable();
-            $table->timestamps();
+            $table->string('name', 100)->unique()->comment('插件名');
+            $table->string('version', 20)->default('')->comment('版本号');
+            $table->tinyInteger('is_enabled')->default(0)->comment('是否启用');
+            $table->text('options')->nullable()->comment('配置项');
+            $table->timestamp('created_at')->nullable()->index()->comment('创建时间');
+            $table->timestamp('updated_at')->nullable()->index()->comment('更新时间');
 
-            $table->engine = 'InnoDB';
+            $table->engine = "InnoDB comment '管理-扩展插件表'";
         });
 
         Schema::create($this->config('database.extension_histories_table') ?: 'admin_extension_histories', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->string('name', 100);
-            $table->tinyInteger('type')->default(1);
-            $table->string('version', 20)->default(0);
-            $table->text('detail')->nullable();
-
+            $table->string('name', 100)->comment('插件名');
+            $table->tinyInteger('type')->default(1)->comment('类型');
+            $table->string('version', 20)->default(0)->comment('版本号');
+            $table->text('detail')->nullable()->comment('详情');
+            $table->timestamp('created_at')->nullable()->index()->comment('创建时间');
+            $table->timestamp('updated_at')->nullable()->index()->comment('更新时间');
             $table->index('name');
-            $table->timestamps();
 
-            $table->engine = 'InnoDB';
+            $table->engine = "InnoDB comment '管理-扩展插件历史版本表'";
         });
     }
 
