@@ -169,6 +169,7 @@ class Grid
         'dialog_form_area'    => ['700px', '670px'],
         'table_class'         => ['table', 'custom-data-table', 'data-table'],
         'scrollbar_x'         => false,
+        'actions_is_right'    => false,
         'actions_class'       => null,
         'batch_actions_class' => null,
         'paginator_class'     => null,
@@ -472,8 +473,7 @@ class Grid
             $this->callBuilder();
             $this->handleExportRequest();
 
-            $this->prependRowSelectorColumn();
-            $this->appendActionsColumn();
+            $this->actionsAlign();
 
             $this->sortHeaders();
 
@@ -486,8 +486,7 @@ class Grid
 
         $collection = clone $this->processFilter();
 
-        $this->prependRowSelectorColumn();
-        $this->appendActionsColumn();
+        $this->actionsAlign();
 
         Column::setOriginalGridModels($collection);
 
@@ -500,6 +499,22 @@ class Grid
         $this->buildRows($collection);
 
         $this->sortHeaders();
+    }
+
+    /**
+     * actions align.
+     * 
+     * @return void
+     */
+    public function actionsAlign()
+    {
+        if($this->option('actions_is_right')){
+            $this->prependRowSelectorColumn();
+            $this->appendActionsColumn();
+        }else{
+            $this->prependActionsColumn();
+            $this->prependRowSelectorColumn();
+        }
     }
 
     /**

@@ -72,7 +72,7 @@ trait HasActions
     }
 
     /**
-     * Add `actions` column for grid.
+     * Append `actions` column for grid.
      *
      * @return void
      */
@@ -85,6 +85,25 @@ trait HasActions
         $attributes = ['class' => 'grid__actions__'];
 
         $this->addColumn(Grid\Column::ACTION_COLUMN_NAME, trans('admin.action'))
+            ->setHeaderAttributes($attributes)
+            ->setAttributes($attributes)
+            ->displayUsing($this->getActionClass(), [$this->actionsCallback]);
+    }
+
+    /**
+     * Prepend `actions` column for grid.
+     *
+     * @return void
+     */
+    protected function prependActionsColumn()
+    {
+        if (! $this->options['actions']) {
+            return;
+        }
+
+        $attributes = ['class' => 'grid__actions__'];
+
+        $this->prependColumn(Grid\Column::ACTION_COLUMN_NAME, trans('admin.action'))
             ->setHeaderAttributes($attributes)
             ->setAttributes($attributes)
             ->displayUsing($this->getActionClass(), [$this->actionsCallback]);
