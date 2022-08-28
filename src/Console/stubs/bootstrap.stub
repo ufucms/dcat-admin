@@ -24,3 +24,12 @@ use Dcat\Admin\Show;
  * Admin::js('/packages/prettydocs/js/main.js');
  *
  */
+Admin::script(<<<JS
+    Dcat.ready(function () {
+        layer.config({
+            maxmin: true,
+            moveOut: true,
+            shade: 0.3,
+        })
+    })
+JS);
