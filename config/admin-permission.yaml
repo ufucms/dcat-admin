@@ -23,9 +23,9 @@
       order: '100'
       children: []
     - name: '菜单'
-      slug: 'menu'
+      slug: 'menus'
       http_method: ''
-      http_path: '/auth/menu*'
+      http_path: '/auth/menus*'
       order: '100'
       children: []
     - name: '扩展'

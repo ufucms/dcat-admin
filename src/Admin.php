@@ -586,7 +586,7 @@ class Admin
                 $router->namespace('Dcat\Admin\Http\Controllers')->group(function ($router) use($appName) {
                     /* @var \Illuminate\Routing\Router $router */
                     $router->resource('auth/admins', 'UserController');
-                    $router->resource('auth/menu', 'MenuController', ['except' => ['create', 'show']]);
+                    $router->resource('auth/menus', 'MenuController', ['except' => ['create', 'show']]);
 
                     if (config("{$appName}.permission.enable")) {
                         $router->resource('auth/roles', 'RoleController');
