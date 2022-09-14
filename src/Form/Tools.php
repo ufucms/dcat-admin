@@ -176,13 +176,14 @@ class Tools implements Renderable
     protected function renderList()
     {
         $text = trans('admin.list');
+        $refresh = trans('admin.refresh');
 
         return <<<EOT
 <div class="btn-group pull-right" style="margin-right: 5px">
     <button data-action="refresh" class="btn btn-sm btn-primary grid-refresh">
-        <i class="feather icon-refresh-cw"></i><span class="d-none d-sm-inline">&nbsp; $refresh</span>
+        <i class="feather icon-refresh-cw"></i><span class="d-none d-sm-inline">&nbsp; {$refresh}</span>
     </button>
-    <a href="{$this->getListPath()}" class="btn btn-sm btn-primary "><i class="feather icon-list"></i><span class="d-none d-sm-inline">&nbsp;$text</span></a>
+    <a href="{$this->getListPath()}" class="btn btn-sm btn-primary "><i class="feather icon-list"></i><span class="d-none d-sm-inline">&nbsp;{$text}</span></a>
 </div>
 EOT;
     }

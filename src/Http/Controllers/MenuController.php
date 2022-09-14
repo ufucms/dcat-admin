@@ -29,7 +29,7 @@ class MenuController extends AdminController
 
                 $row->column(5, function (Column $column) {
                     $form = new WidgetForm();
-                    $form->action(admin_url('auth/menu'));
+                    $form->action(admin_url('auth/menus'));
 
                     $menuModel = config('admin.database.menu_model');
                     $permissionModel = config('admin.database.permissions_model');
@@ -155,7 +155,7 @@ class MenuController extends AdminController
             $form->display('created_at', trans('admin.created_at'));
             $form->display('updated_at', trans('admin.updated_at'));
         })->saved(function (Form $form, $result) {
-            $response = $form->response()->location('auth/menu');
+            $response = $form->response()->location('auth/menus');
 
             if ($result) {
                 return $response->success(__('admin.save_succeeded'));

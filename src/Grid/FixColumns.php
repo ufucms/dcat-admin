@@ -257,8 +257,29 @@ JS;
 }
 
 .table-main {
+    table-layout: fixed;
     overflow: auto;
     width: 100%;
+}
+
+.table-main img,
+.table-main svg{
+  display: inline-block;
+}
+
+.table-main table.custom-data-table td,
+.table-main table.custom-data-table th{
+  z-index: 0;
+}
+
+.table-main table.custom-data-table thead,
+.table-fixed table.custom-data-table thead tr th{
+    background-color: #ececf1;
+    position: sticky;
+    top: 0;
+}
+.table-fixed table.custom-data-table thead tr th {
+  z-index: 99;
 }
 
 .table-fixed {
