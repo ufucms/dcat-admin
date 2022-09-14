@@ -270,6 +270,7 @@ select.form-control {
           ~.vs-checkbox{
             transform: rotate(0deg);
             border-color: $primary;
+            background-color: $primary;
             .vs-checkbox--check{
               transform: translate(0);
               background-color: $primary;
