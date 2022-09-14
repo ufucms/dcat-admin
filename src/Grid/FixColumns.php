@@ -196,7 +196,7 @@ class FixColumns
             $(v).css({'max-height': maxHeight + 'px'});
 
             if (maxHeight < tableHight) {
-                $(v).parents('.tables-container').find('.table-fixed-right').css({right: '12px'})
+                $(v).parents('.tables-container').find('.table-fixed-right').css({right: '10px'})
             }
         });
         $('.table-fixed-right,.table-fixed-left').each(function (k, v) {
