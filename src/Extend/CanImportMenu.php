@@ -3,6 +3,7 @@
 namespace Dcat\Admin\Extend;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 /**
@@ -54,15 +55,21 @@ trait CanImportMenu
 
         if ($menuModel = $this->getMenuModel()) {
             $lastOrder = $menuModel::max('order');
-
-            $menuModel::create([
+            $data = [
                 'parent_id' => $this->getParentMenuId($menu['parent'] ?? 0),
                 'order'     => $lastOrder + 1,
                 'title'     => $menu['title'],
                 'icon'      => (string) ($menu['icon'] ?? ''),
                 'uri'       => (string) ($menu['uri'] ?? ''),
                 'extension' => $this->getName(),
-            ]);
+            ];
+            $extensionInfo = $menuModel::where('extension', '!=', '')->first();
+            if(!isset($extensionInfo) || !$extensionInfo){
+                $prefix = env('DB_PREFIX', '');
+                $table  = config('admin.database.menu_table');
+                DB::update("ALTER TABLE {$prefix}{$table} AUTO_INCREMENT = 16777217;");
+            }
+            $menuModel::create($data);
         }
     }
 

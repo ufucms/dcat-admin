@@ -22,7 +22,6 @@ class AdminTablesSeeder extends Seeder
             'username'   => 'admin',
             'password'   => bcrypt('admin'),
             'name'       => 'Administrator',
-            'created_at' => $createdAt,
         ]);
 
         // create a role.
@@ -30,7 +29,6 @@ class AdminTablesSeeder extends Seeder
         Role::create([
             'name'       => 'Administrator',
             'slug'       => Role::ADMINISTRATOR,
-            'created_at' => $createdAt,
         ]);
 
         // add role to user.
@@ -51,6 +49,7 @@ class AdminTablesSeeder extends Seeder
                 'http_path'   => $v['http_path'],
                 'order'       => $v['order'],
                 'created_at'  => $createdAt,
+                'updated_at'  => $createdAt,
             ];
 
             if(isset($v['children']) && $v['children']){
@@ -65,6 +64,7 @@ class AdminTablesSeeder extends Seeder
                         'http_path'   => $va['http_path'],
                         'order'       => $va['order'],
                         'created_at'  => $createdAt,
+                        'updated_at'  => $createdAt,
                     ];
 
                     if(isset($va['children']) && $va['children']){
@@ -79,6 +79,7 @@ class AdminTablesSeeder extends Seeder
                                 'http_path'   => $val['http_path'],
                                 'order'       => $val['order'],
                                 'created_at'  => $createdAt,
+                                'updated_at'  => $createdAt,
                             ];
                         }
                     }
@@ -104,6 +105,7 @@ class AdminTablesSeeder extends Seeder
                 'uri'        => $v['uri'],
                 'order'      => $v['order'],
                 'created_at' => $createdAt,
+                'updated_at' => $createdAt,
             ];
 
             if(isset($v['children']) && $v['children']){
@@ -117,6 +119,7 @@ class AdminTablesSeeder extends Seeder
                         'uri'        => $va['uri'],
                         'order'      => $va['order'],
                         'created_at' => $createdAt,
+                        'updated_at' => $createdAt,
                     ];
 
                     if(isset($va['children']) && $va['children']){
@@ -130,6 +133,7 @@ class AdminTablesSeeder extends Seeder
                                 'uri'        => $val['uri'],
                                 'order'      => $val['order'],
                                 'created_at' => $createdAt,
+                                'updated_at' => $createdAt,
                             ];
                         }
                     }
