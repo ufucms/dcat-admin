@@ -3,6 +3,7 @@
 namespace {namespace};
 
 use Dcat\Admin\Extend\ServiceProvider;
+use Symfony\Component\Yaml\Yaml;
 use Dcat\Admin\Admin;
 
 class {className}ServiceProvider extends ServiceProvider
@@ -12,13 +13,9 @@ class {className}ServiceProvider extends ServiceProvider
 		'css/index.css',
 	];
 
-	protected $menu = [
-		//
-	];
-
 	public function register()
 	{
-		//
+		// $this->setMenu();
 	}
 
 	public function init()
@@ -32,5 +29,10 @@ class {className}ServiceProvider extends ServiceProvider
 	public function settingForm()
 	{
 		return new Setting($this);
+	}
+
+	protected function setMenu(){
+		$menuYaml = Yaml::parseFile(__DIR__ . '/menu.yaml');
+		$this->menu = $this->makeMenu($menuYaml, 0);
 	}
 }

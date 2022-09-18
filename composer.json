@@ -3,12 +3,12 @@
     "description": "dcat admin",
     "type": "library",
     "keywords": ["dcat", "laravel", "admin", "grid", "form", "laravel admin"],
-    "homepage": "https://github.com/jqhph/dcat-admin",
+    "homepage": "https://github.com/ufucms/dcat-admin",
     "license": "MIT",
     "authors": [
         {
-            "name": "jqh",
-            "email": "841324345@qq.com"
+            "name": "ufucms",
+            "email": "ufucms@ufucms.com"
         }
     ],
     "require": {

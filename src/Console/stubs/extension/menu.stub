@@ -1,0 +1,28 @@
+- title: '测试菜单1'
+  uri: ''
+  icon: 'feather icon-airplay'
+  children: 
+    - title: '测试菜单1-1'
+      uri: '/demo/test/test1'
+      icon: ''
+      children: 
+        - title: '测试菜单1-1-1'
+          uri: '/demo/test1/test11'
+          icon: ''
+          children: []
+        - title: '测试菜单1-1-2'
+          uri: '/demo/test1/test12'
+          icon: ''
+          children: []
+    - title: '测试菜单1-2'
+      uri: '/demo/test2/test2'
+      icon: ''
+      children: []
+    - title: '测试菜单1-3'
+      uri: ''
+      icon: ''
+      children: 
+        - title: '测试菜单1-3-1'
+          uri: '/demo/test3/test1'
+          icon: ''
+          children: []

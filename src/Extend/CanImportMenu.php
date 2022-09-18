@@ -145,4 +145,30 @@ trait CanImportMenu
     {
         return config('admin.database.menu_model');
     }
+
+
+    /**
+     * ymal树形结构数组转换成菜单需要的一维数组
+     *
+     * @param  array  $data tree树形菜单
+     * @param  array  $parent 菜单上级title，顶级为数字0或空字符串
+     *
+     * @return array
+     */
+    protected function makeMenu($data=[], $parent=0)
+    {
+        $menus = [];
+        if($data){
+            foreach ($data as $key => $item) {
+                $menu = [];
+                if($item['children']){
+                    $menu = $this->makeMenu($item['children'], $item['title']);
+                }
+                unset($item['children']);
+                $item['parent'] = $parent;
+                $menus = array_merge($menus, [$item], $menu);
+            }
+        }
+        return $menus;
+    }
 }

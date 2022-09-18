@@ -329,6 +329,7 @@ TEXT;
             __DIR__.'/stubs/extension/.gitignore.stub'   => '.gitignore',
             __DIR__.'/stubs/extension/README.md.stub'    => 'README.md',
             __DIR__.'/stubs/extension/version.stub'      => 'version.php',
+            __DIR__.'/stubs/extension/menu.stub'         => 'menu.yaml',
         ];
 
         if ($this->option('theme')) {
