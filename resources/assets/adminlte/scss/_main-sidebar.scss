@@ -23,12 +23,18 @@
   .nav-treeview.nav {
     .nav-item .nav-link {
       padding: $sidebar-tree-item-padding!important;
-      //margin-right: 0;
+      // margin-right: 0;
     }
-
     //.nav-item .nav-link.active {
-    //    //  padding: 8px 10px 8px 15px!important;
-    //    //}
+    //    padding: 8px 10px 8px 15px!important;
+    //}
+
+    .nav-treeview.nav {
+      padding: $sidebar-tree-item-padding!important;
+      .nav-item .nav-link {
+        padding: $sidebar-tree-item-padding!important;
+      }
+    }
   }
 }
 
@@ -322,7 +328,7 @@
 
         i {
           margin-right: 0;
-          margin-left: 18px;
+          margin-left: 25px;
         }
         p i {
           margin-right: 0;
