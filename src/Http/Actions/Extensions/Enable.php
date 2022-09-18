@@ -18,7 +18,7 @@ class Enable extends RowAction
 
         return $this
             ->response()
-            ->success(trans('admin.update_succeeded'))
-            ->refresh();
+            ->location()
+            ->success(trans('admin.update_succeeded'));
     }
 }

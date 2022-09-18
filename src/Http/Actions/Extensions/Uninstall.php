@@ -29,7 +29,7 @@ class Uninstall extends RowAction
 
         return $this
             ->response()
-            ->success(implode('<br>', $manager->notes))
-            ->refresh();
+            ->location()
+            ->success(implode('<br>', $manager->notes));
     }
 }
