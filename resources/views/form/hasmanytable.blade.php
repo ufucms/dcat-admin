@@ -1,5 +1,6 @@
 <style>
     .table-has-many .input-group{flex-wrap: nowrap!important}
+    .add.btn{margin-left: .55rem;}
 </style>
 
 <div class="row form-group">
