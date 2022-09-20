@@ -55,6 +55,10 @@ table.data-table {
   padding-left: 2rem;
 }
 
+.table.table-has-many tr td:first-child, .table.table-has-many tr th:first-child {
+  padding-left: .55rem;
+}
+
 .quick-search-clear {
   margin-left:-1.45rem;
   position: relative;
