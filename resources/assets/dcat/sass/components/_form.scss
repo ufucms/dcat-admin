@@ -60,7 +60,11 @@ select.form-control:not([multiple=multiple]) {
   text-transform: capitalize;
 }
 
-/*.fields-group .row.form-group {
+/*.control-label-font-size {
+  font-size: 1rem;
+}
+
+.fields-group .row.form-group {
   margin-right: 0;
   margin-left: 0;
 }*/

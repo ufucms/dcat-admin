@@ -4,7 +4,7 @@
 </style>
 
 <div class="row form-group">
-    <div class="{{$viewClass['label']}} "><label class="control-label pull-right">{!! $label !!}</label></div>
+    <label class="{{$viewClass['label']}} control-label pull-right">{!! $label !!}</label>
     <div class="{{$viewClass['field']}}">
         @include('admin::form.error')
 
