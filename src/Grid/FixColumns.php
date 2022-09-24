@@ -319,6 +319,10 @@ body.dark-mode .table-fixed-left .table {
 body.dark-mode .table-fixed-right .table {
      padding: 0 1rem 0 0;
 }
+.grid__actions__ > a{
+    display: inline-block;
+    margin-right: 5px;
+}
 CSS;
 
         Admin::style($style);
