@@ -253,6 +253,15 @@ body:not(.dark-mode) {
       border-top: 0
     }
 
+    .custom-data-table tbody td.grid__actions__ > a{
+      display: inline-block;
+      margin-right: 5px;
+    }
+
+    .custom-data-table tbody td.grid__actions__ > a:last-child{
+      margin-right: 0;
+    }
+
     table.custom-data-table tbody tr {
       box-shadow: none;
     }

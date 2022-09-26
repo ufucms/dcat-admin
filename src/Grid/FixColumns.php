@@ -323,6 +323,9 @@ body.dark-mode .table-fixed-right .table {
     display: inline-block;
     margin-right: 5px;
 }
+.grid__actions__ > a:last-child{
+    margin-right: 0;
+}
 CSS;
 
         Admin::style($style);
