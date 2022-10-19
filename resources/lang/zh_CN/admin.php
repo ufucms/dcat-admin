@@ -91,6 +91,7 @@ return [
     'back_to_list'          => '返回列表',
     'submit'                => '提交',
     'menu'                  => '菜单',
+    'more_menu_description' => '更多图标请参见',
     'input'                 => '输入',
     'succeeded'             => '成功',
     'failed'                => '失败',

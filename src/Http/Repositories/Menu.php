@@ -12,4 +12,14 @@ class Menu extends EloquentRepository
 
         parent::__construct($modelOrRelations);
     }
+
+    /**
+     * Help message for icon field.
+     *
+     * @return string
+     */
+    public static function iconHelp()
+    {
+        return trans('admin.more_menu_description') . ' <a href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a>';
+    }
 }

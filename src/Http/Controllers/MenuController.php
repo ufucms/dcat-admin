@@ -37,7 +37,7 @@ class MenuController extends AdminController
 
                     $form->select('parent_id', trans('admin.parent_id'))->options($menuModel::selectOptions());
                     $form->text('title', trans('admin.title'))->required();
-                    $form->icon('icon', trans('admin.icon'))->help($this->iconHelp());
+                    $form->icon('icon', trans('admin.icon'))->help(Menu::iconHelp());
                     $form->text('uri', trans('admin.uri'));
 
                     if ($menuModel::withRole()) {
@@ -120,7 +120,7 @@ class MenuController extends AdminController
                 return (int) $v;
             });
             $form->text('title', trans('admin.title'))->required();
-            $form->icon('icon', trans('admin.icon'))->help($this->iconHelp());
+            $form->icon('icon', trans('admin.icon'))->help(Menu::iconHelp());
             $form->text('uri', trans('admin.uri'));
             $form->switch('show', trans('admin.show'));
 
@@ -163,15 +163,5 @@ class MenuController extends AdminController
 
             return $response->info(__('admin.nothing_updated'));
         });
-    }
-
-    /**
-     * Help message for icon field.
-     *
-     * @return string
-     */
-    protected function iconHelp()
-    {
-        return 'For more icons please see <a href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a>';
     }
 }

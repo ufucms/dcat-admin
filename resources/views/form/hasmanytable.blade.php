@@ -76,6 +76,7 @@
                 </div>
             @endif
         </div>
+        @include('admin::form.help-block')
     </div>
 </div>
 

@@ -91,6 +91,7 @@ return [
     'back_to_list'          => '返回列表',
     'submit'                => '送出',
     'menu'                  => '目錄',
+    'more_menu_description' => '更多圖標請參見',
     'input'                 => '輸入',
     'succeeded'             => '成功',
     'failed'                => '失敗',

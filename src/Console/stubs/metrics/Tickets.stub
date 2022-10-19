@@ -75,7 +75,7 @@ class Tickets extends RadialBar
     {
         return $this->content(
             <<<HTML
-<div class="d-flex flex-column flex-wrap text-center">
+<div class="d-flex flex-column flex-wrap text-center pl-1">
     <h1 class="font-lg-2 mt-2 mb-0">{$content}</h1>
     <small>Tickets</small>
 </div>

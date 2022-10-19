@@ -95,6 +95,7 @@ return [
     'back_to_list'          => 'Back to List',
     'submit'                => 'Submit',
     'menu'                  => 'Menu',
+    'more_menu_description' => 'For more icons please see',
     'input'                 => 'Input',
     'succeeded'             => 'Succeeded',
     'failed'                => 'Failed',
