@@ -110,6 +110,8 @@ class Form implements Renderable
 
     const CURRENT_URL_NAME = '_current_';
 
+    const MAX_TIMESTAMP = "2038-01-01 01:01:01";
+
     /**
      * Available fields.
      *
