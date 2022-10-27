@@ -759,7 +759,7 @@ class Form implements Renderable
     protected function handleOrderable(array $input = [])
     {
         if (array_key_exists('_orderable', $input)) {
-            $updated = $input['_orderable'] == 1
+            $updated = $input['_orderable'] == 1 && $input['_orderby'] == 'asc'
                 ? $this->repository->moveOrderUp()
                 : $this->repository->moveOrderDown();
 

@@ -42,6 +42,9 @@ trait GridCreator
                 \$filter->equal('$primaryKey');
         
             });
+            // \$grid->orderByDesc('order');
+            // \$grid->orderBy('order');
+            // \$grid->scrollbarX();
 EOF;
 
         return implode("\n", $rows);

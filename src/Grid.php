@@ -140,6 +140,11 @@ class Grid
     /**
      * @var string
      */
+    protected $direction = 'asc';
+
+    /**
+     * @var string
+     */
     protected $tableId = 'grid-table';
 
     /**
@@ -251,6 +256,16 @@ class Grid
     public function getKeyName()
     {
         return $this->keyName ?: 'id';
+    }
+
+    /**
+     * Get or set primary key name.
+     *
+     * @return string|array
+     */
+    public function getDirection()
+    {
+        return $this->direction ?: 'asc';
     }
 
     /**
@@ -424,6 +439,28 @@ class Grid
     public function model()
     {
         return $this->model;
+    }
+
+    /**
+     * Set Grid Default order desc.
+     *
+     * @return Model
+     */
+    public function orderByDesc(string $column='order')
+    {
+        $this->direction = 'desc';
+        return $this->model->orderByDesc($column);
+    }
+
+    /**
+     * Set Grid Default order.
+     *
+     * @return Model
+     */
+    public function orderBy(string $column='order', string $direction = 'asc')
+    {
+        $this->direction = $direction;
+        return $this->model->orderBy($column, $direction);
     }
 
     /**

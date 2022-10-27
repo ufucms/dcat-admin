@@ -107,6 +107,16 @@ abstract class AbstractDisplayer
     }
 
     /**
+     * Get key of current row.
+     *
+     * @return mixed
+     */
+    public function getDirection()
+    {
+        return $this->grid->getDirection();
+    }
+
+    /**
      * Get url path of current resource.
      *
      * @return string

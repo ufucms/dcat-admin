@@ -31,6 +31,7 @@ export default class Orderable {
 
             _this.key = $this.data('id');
             _this.direction = $this.data('direction');
+            _this.orderby = $this.data('orderby');
             _this.row = $this.closest('tr');
             _this.depth = _this.helper.getDepth(_this.row);
 
@@ -45,6 +46,7 @@ export default class Orderable {
             row = _this.row,
             depth = _this.depth,
             direction = _this.direction,
+            orderby = _this.orderby,
             prevAll = row.prevAll(),
             nextAll = row.nextAll(),
             prev = row.prevAll('tr').first(),
@@ -52,7 +54,7 @@ export default class Orderable {
 
         $.put({
             url: _this.options.url.replace(':key', key),
-            data: {_orderable: direction},
+            data: {_orderable: direction, _orderby: orderby},
             success: function(data){
                 Dcat.loading(false);
 
