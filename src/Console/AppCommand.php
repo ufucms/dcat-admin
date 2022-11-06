@@ -44,8 +44,8 @@ class AppCommand extends InstallCommand
         $files->put(
             $config = config_path($app.'.php'),
             str_replace(
-                ['DummyNamespace', 'DummyApp'],
-                [$namespace, $app],
+                ['DummyNamespace', 'DummyApp', 'DummyRoute'],
+                [$namespace, $app, strtoupper($app)],
                 $files->get(__DIR__.'/stubs/config.stub')
             )
         );
