@@ -12,7 +12,8 @@ class AppCommand extends InstallCommand
      *
      * @var string
      */
-    protected $signature = 'admin:app {name}';
+    protected $signature = 'admin:app {name} 
+        {--yaml= : Create menu permission yaml files}';
 
     /**
      * The console command description.
@@ -28,7 +29,12 @@ class AppCommand extends InstallCommand
      */
     public function handle()
     {
+        $yaml = $this->option('yaml');
+
         $this->addConfig();
+        if($yaml){
+            $this->addYaml();
+        }
         $this->initAdminDirectory();
 
         $this->info('Done.');
@@ -51,6 +57,20 @@ class AppCommand extends InstallCommand
         );
 
         config(['admin' => include $config]);
+    }
+
+    protected function addYaml()
+    {
+        /* @var Filesystem $files */
+        $files = $this->laravel['files'];
+
+        $app = strtolower($this->argument('name'));
+
+        $menu = config_path($app.'-menu.yaml');
+        $files->put($menu, $this->getStub('app-menu'));
+
+        $permission = config_path($app.'-permission.yaml');
+        $files->put($permission, $this->getStub('app-permission'));
     }
 
     /**
