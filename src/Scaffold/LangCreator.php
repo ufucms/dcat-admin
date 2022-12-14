@@ -45,6 +45,8 @@ class LangCreator
             'labels' => [
                 $controller => $title,
                 Helper::slug($controller) => $title,
+                'create' => admin_trans('admin.create'),
+                'edit'   => admin_trans('admin.edit'),
             ],
             'fields'  => [],
             'options' => [],
