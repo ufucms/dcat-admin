@@ -11,6 +11,7 @@ use Dcat\Admin\Scaffold\MigrationCreator;
 use Dcat\Admin\Scaffold\ModelCreator;
 use Dcat\Admin\Scaffold\RepositoryCreator;
 use Dcat\Admin\Support\Helper;
+use Dcat\Admin\Models\Extension;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
@@ -68,8 +69,24 @@ class ScaffoldController extends Controller
             Permission::error();
         }
 
+        $modelNamespace = 'App\\Models\\';
+        $namespaceBase = 'App\\'.implode('\\', array_map(function ($name) {
+            return Str::studly($name);
+        }, explode(DIRECTORY_SEPARATOR, substr(config('admin.directory'), strlen(app_path().DIRECTORY_SEPARATOR)))));
         if ($tableName = request('singular')) {
-            return $this->singular($tableName);
+            $ext_id = request('ext_id', 0);
+            if($ext_id){
+                $extension = Extension::where('id', $ext_id)->value('name');
+                $namespaceBase = implode('\\', array_map(function ($name) {
+                    return Str::studly($name);
+                }, explode('.', $extension)));
+
+                $modelNamespace = $namespaceBase . '\\Models\\';
+            }
+            return array_merge([
+                'namespaceBase' => $namespaceBase,
+                'modelNamespace' => $modelNamespace,
+            ],$this->singular($tableName));
         }
 
         Admin::requireAssets('select2');
@@ -78,19 +95,17 @@ class ScaffoldController extends Controller
         $dbTypes = static::$dbTypes;
         $dataTypeMap = static::$dataTypeMap;
         $action = URL::current();
-        $namespaceBase = 'App\\'.implode('\\', array_map(function ($name) {
-            return Str::studly($name);
-        }, explode(DIRECTORY_SEPARATOR, substr(config('admin.directory'), strlen(app_path().DIRECTORY_SEPARATOR)))));
         $tables = collect($this->getDatabaseColumns())->map(function ($v) {
             return array_keys($v);
         })->toArray();
+        $extensions = Extension::all()->toArray();
 
         return $content
             ->title(trans('admin.scaffold.header'))
             ->description(' ')
             ->body(view(
                 'admin::helpers.scaffold',
-                compact('dbTypes', 'action', 'tables', 'dataTypeMap', 'namespaceBase')
+                compact('dbTypes', 'action', 'tables', 'extensions', 'dataTypeMap', 'namespaceBase', 'modelNamespace')
             ));
     }
 
@@ -117,10 +132,19 @@ class ScaffoldController extends Controller
         $model = $request->get('model_name');
         $repository = $request->get('repository_name');
 
+        $extension = '';
+        $extension_id = $request->input('extension_id', 0);
+        if($extension_id){
+            $extension_name = Extension::where('id', $extension_id)->value('name');
+            $extension = implode('/', array_map(function ($name) {
+                            return Str::studly($name);
+                        }, explode('.', $extension_name)));
+        }
+
         try {
             // 1. Create model.
             if (in_array('model', $creates)) {
-                $modelCreator = new ModelCreator($table, $model);
+                $modelCreator = new ModelCreator($table, $model, null, $extension);
 
                 $paths['model'] = $modelCreator->create(
                     $request->get('primary_key'),
@@ -131,7 +155,7 @@ class ScaffoldController extends Controller
 
             // 2. Create controller.
             if (in_array('controller', $creates)) {
-                $paths['controller'] = (new ControllerCreator($controller))
+                $paths['controller'] = (new ControllerCreator($controller, null, $extension))
                     ->create(in_array('repository', $creates) ? $repository : $model);
             }
 
@@ -148,12 +172,12 @@ class ScaffoldController extends Controller
             }
 
             if (in_array('lang', $creates)) {
-                $paths['lang'] = (new LangCreator($request->get('fields')))
+                $paths['lang'] = (new LangCreator($request->get('fields'), $extension))
                     ->create($controller, $request->get('translate_title'));
             }
 
             if (in_array('repository', $creates)) {
-                $paths['repository'] = (new RepositoryCreator())
+                $paths['repository'] = (new RepositoryCreator($extension))
                     ->create($model, $repository);
             }
 

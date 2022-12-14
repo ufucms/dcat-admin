@@ -9,9 +9,18 @@ class LangCreator
 {
     protected $fields = [];
 
-    public function __construct(array $fields)
+    /**
+     * extension name.
+     *
+     * @var string
+     */
+    protected $extension;
+
+    public function __construct(array $fields, $extension = '')
     {
         $this->fields = $fields;
+
+        $this->extension = $extension;
     }
 
     /**
@@ -48,6 +57,9 @@ class LangCreator
             $content['fields'][$field['name']] = $field['translation'] ?: $field['name'];
         }
 
+        $content['fields']['created_at'] = admin_trans('admin.created_at');
+        $content['fields']['updated_at'] = admin_trans('admin.updated_at');
+
         $files = app('files');
         if ($files->put($filename, Helper::exportArrayPhp($content))) {
             $files->chmod($filename, 0777);
@@ -65,6 +77,11 @@ class LangCreator
     protected function getLangPath(string $controller)
     {
         $path = rtrim(app()->langPath(), '/').'/'.App::getLocale();
+        if($this->extension){
+            $extension_dir = substr(config('admin.extension.dir'), strlen(base_path().DIRECTORY_SEPARATOR));
+            $extension = strtolower($this->extension);
+            $path = base_path("{$extension_dir}/{$extension}/resources/lang/").App::getLocale();
+        }
 
         return $path.'/'.Helper::slug($controller).'.php';
     }

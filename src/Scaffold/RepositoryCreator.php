@@ -6,6 +6,25 @@ use Dcat\Admin\Support\Helper;
 
 class RepositoryCreator
 {
+
+    /**
+     * extension name.
+     *
+     * @var string
+     */
+    protected $extension;
+
+    /**
+     * RepositoryCreator constructor.
+     *
+     * @param  string  $name
+     * @param  null  $files
+     */
+    public function __construct($extension = '')
+    {
+        $this->extension = $extension;
+    }
+
     /**
      * @param  string  $modelClass
      * @param  string  $repositoryClass
@@ -18,6 +37,11 @@ class RepositoryCreator
         $files = app('files');
 
         $path = Helper::guessClassFileName($repositoryClass);
+        if($this->extension){
+            $extension_dir = substr(config('admin.extension.dir'), strlen(base_path().DIRECTORY_SEPARATOR));
+            $extension = strtolower($this->extension);
+            $path = str_replace("/{$this->extension}/", "/{$extension_dir}/{$extension}/src/", $path);
+        }
         $dir = dirname($path);
 
         if (! is_dir($dir)) {

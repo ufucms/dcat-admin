@@ -24,16 +24,30 @@ class ControllerCreator
     protected $files;
 
     /**
+     * extension name.
+     *
+     * @var string
+     */
+    protected $extension;
+
+    /**
      * ControllerCreator constructor.
      *
      * @param  string  $name
      * @param  null  $files
      */
-    public function __construct($name, $files = null)
+    public function __construct($name, $files = null, $extension = '')
     {
-        $this->name = $name;
+        $this->extension = $extension;
+
+        if($this->extension){
+            $this->name = str_replace('\\Controllers\\', '\\Http\\Controllers\\', $name);
+        }else{
+            $this->name = $name;
+        }
 
         $this->files = $files ?: app('files');
+
     }
 
     /**
@@ -63,7 +77,13 @@ class ControllerCreator
 
         $model = $model ?: 'App\Admin\Repositories\\'.$slug;
 
-        $this->files->put($path, $this->replace($stub, $this->name, $model, $slug));
+        $language = '';
+        if($this->extension){
+            $extension = strtolower(str_replace('/', '.', $this->extension));
+            $language = "{$extension}::" . Helper::slug($slug);
+        }
+
+        $this->files->put($path, $this->replace($stub, $this->name, $model, $slug, $language));
         $this->files->chmod($path, 0777);
 
         return $path;
@@ -75,7 +95,7 @@ class ControllerCreator
      * @param  string  $model
      * @return string
      */
-    protected function replace($stub, $name, $model, $slug)
+    protected function replace($stub, $name, $model, $slug, $language)
     {
         $stub = $this->replaceClass($stub, $name);
 
@@ -85,6 +105,7 @@ class ControllerCreator
                 'DummyModel',
                 'DummyTitle',
                 '{controller}',
+                '{language}',
                 '{grid}',
                 '{form}',
                 '{show}',
@@ -94,6 +115,7 @@ class ControllerCreator
                 class_basename($model),
                 class_basename($model),
                 $slug,
+                $language,
                 $this->generateGrid(),
                 $this->generateForm(),
                 $this->generateShow(),
@@ -135,7 +157,13 @@ class ControllerCreator
      */
     public function getPath($name)
     {
-        return Helper::guessClassFileName($name);
+        $path = Helper::guessClassFileName($name);
+        if($this->extension){
+            $extension_dir = substr(config('admin.extension.dir'), strlen(base_path().DIRECTORY_SEPARATOR));
+            $extension = strtolower($this->extension);
+            $path = str_replace("/{$this->extension}/", "/{$extension_dir}/{$extension}/src/", $path);
+        }
+        return $path;
     }
 
     /**

@@ -426,7 +426,7 @@ if (! function_exists('admin_extension_path')) {
      */
     function admin_extension_path(string $path = '')
     {
-        $dir = rtrim(config('admin.extension.dir'), '/') ?: base_path('dcat-admin-extensions');
+        $dir = rtrim(config('admin.extension.dir'), '/') ?: base_path('addons');
 
         $path = ltrim($path, '/');
 

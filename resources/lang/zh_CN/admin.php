@@ -4,6 +4,7 @@ return [
     'scaffold' => [
         'header'            => '代码生成器',
         'choose'            => '选择已有数据表',
+        'choose_extension'  => '选择已有扩展',
         'table'             => '表名',
         'model'             => '模型',
         'controller'        => '控制器',

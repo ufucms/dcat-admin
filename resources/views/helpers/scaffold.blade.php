@@ -38,7 +38,7 @@
 
                 <div class="form-group row">
 
-{{--                    <label for="inputTableName" class="col-sm-1 control-label text-capitalize">{{(trans('admin.scaffold.table'))}}</label>--}}
+                    {{-- <label for="inputTableName" class="col-sm-1 control-label text-capitalize">{{(trans('admin.scaffold.table'))}}</label> --}}
 
                     <div for="inputTableName"  class="col-sm-1 control-label text-capitalize">
                         <span>{{(trans('admin.scaffold.table'))}}</span>
@@ -51,17 +51,30 @@
                         </div>
                     </div>
 
-                    <div class=" col-sm-2" style="margin-left: -15px;">
-                        <select class="choose-exist-table"  name="exist-table">
-                            <option value="0" selected>{{trans('admin.scaffold.choose')}}</option>
-                            @foreach($tables as $db => $tb)
-                                <optgroup label="{!! $db !!}">
-                                    @foreach($tb as $v)
-                                        <option value="{{$db}}|{{$v}}">{{$v}}</option>
-                                    @endforeach
-                                </optgroup>
-                            @endforeach
-                        </select>
+                    <div class="col-sm-2" style="margin-left: -15px;">
+                        <div class="input-group">
+                            <select class="choose-exist-extension" name="extension_id" id="choose-exist-extension">
+                                <option value="0" selected>{{trans('admin.scaffold.choose_extension')}}</option>
+                                @foreach($extensions as $db => $extension)
+                                    <option value="{{$extension['id']}}">{{$extension['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2" style="margin-left: -15px;">
+                        <div class="input-group">
+                            <select class="choose-exist-table" name="exist-table">
+                                <option value="0" selected>{{trans('admin.scaffold.choose')}}</option>
+                                @foreach($tables as $db => $tb)
+                                    <optgroup label="{!! $db !!}">
+                                        @foreach($tb as $v)
+                                            <option value="{{$db}}|{{$v}}">{{$v}}</option>
+                                        @endforeach
+                                    </optgroup>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
                     <span class="help-block " id="table-name-help" style="margin-left:150px;display: none">
@@ -305,16 +318,24 @@
             $table = $('#inputTableName'),
             $fieldsBody = $('#table-fields tbody'),
             tpl = $('#table-field-tpl').html(),
-            modelNamespace = 'App\\Models\\',
+            modelNamespace = '{{ str_replace( '\\', '\\\\', $modelNamespace ) }}',
             namespaceBase = '{{ str_replace( '\\', '\\\\', $namespaceBase ) }}',
             repositoryNamespace = namespaceBase + '\\Repositories\\',
             controllerNamespace = namespaceBase + '\\Controllers\\',
             dataTypeMap = {!! json_encode($dataTypeMap) !!},
             helpers = Dcat.helpers;
 
-        var withSingularName = helpers.debounce(function (table) {
-            $.ajax('{{ url(request()->path()) }}?singular=' + table, {
+        var withSingularName = helpers.debounce(function (table, ext_id) {
+            $.ajax('{{ url(request()->path()) }}?singular=' + table + '&ext_id=' + ext_id, {
                 success: function (data) {
+                    if(data.namespaceBase){
+                        namespaceBase = data.namespaceBase;
+                        repositoryNamespace = namespaceBase + '\\Repositories\\';
+                        controllerNamespace = namespaceBase + '\\Controllers\\';
+                    }
+                    if(data.modelNamespace){
+                        modelNamespace = data.modelNamespace;
+                    }
                     writeController(data.value);
                     writeModel(data.value);
                     witeRepository(data.value);
@@ -375,6 +396,7 @@
         });
 
         $('.choose-exist-table').on('change', function () {
+            var ext_id = $("#choose-exist-extension").val();
             var val = $(this).val(), tb, db;
             if (val == '0') {
                 $table.val('');
@@ -388,7 +410,7 @@
             Dcat.loading();
             $table.val(tb);
 
-            withSingularName(tb);
+            withSingularName(tb, ext_id);
 
             $.post({
                 url: '{{ admin_url('helpers/scaffold/table') }}',

@@ -30,19 +30,28 @@ class ModelCreator
     protected $files;
 
     /**
+     * extension name.
+     *
+     * @var string
+     */
+    protected $extension;
+
+    /**
      * ModelCreator constructor.
      *
      * @param  string  $tableName
      * @param  string  $name
      * @param  null  $files
      */
-    public function __construct($tableName, $name, $files = null)
+    public function __construct($tableName, $name, $files = null, $extension = '')
     {
         $this->tableName = $tableName;
 
         $this->name = $name;
 
         $this->files = $files ?: app('files');
+
+        $this->extension = $extension;
     }
 
     /**
@@ -93,7 +102,13 @@ class ModelCreator
      */
     public function getPath($name)
     {
-        return Helper::guessClassFileName($name);
+        $path = Helper::guessClassFileName($name);
+        if($this->extension){
+            $extension_dir = substr(config('admin.extension.dir'), strlen(base_path().DIRECTORY_SEPARATOR));
+            $extension = strtolower($this->extension);
+            $path = str_replace("/{$this->extension}/", "/{$extension_dir}/{$extension}/src/", $path);
+        }
+        return $path;
     }
 
     /**
