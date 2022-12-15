@@ -40,7 +40,7 @@ class RepositoryCreator
         if($this->extension){
             $extension_dir = substr(config('admin.extension.dir'), strlen(base_path().DIRECTORY_SEPARATOR));
             $extension = strtolower($this->extension);
-            $path = str_replace("/{$this->extension}/", "/{$extension_dir}/{$extension}/src/", $path);
+            $path = str_replace("/{$this->extension}/", "/{$extension_dir}/{$extension}/src/Http/", $path);
         }
         $dir = dirname($path);
 

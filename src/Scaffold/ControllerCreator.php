@@ -99,9 +99,16 @@ class ControllerCreator
     {
         $stub = $this->replaceClass($stub, $name);
 
+        $asModel = " as Model";
+        if(stripos($model, 'Repositories') > -1){
+            $models = str_replace('Repositories', 'Models', str_replace('Admin\Repositories', 'Models', $model));
+            $asModel = ";\r\nuse {$models} as Model";
+        }
+
         return str_replace(
             [
                 'DummyModelNamespace',
+                '{asModel}',
                 'DummyModel',
                 'DummyTitle',
                 '{controller}',
@@ -112,6 +119,7 @@ class ControllerCreator
             ],
             [
                 $model,
+                $asModel,
                 class_basename($model),
                 class_basename($model),
                 $slug,

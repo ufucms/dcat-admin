@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-use DummyModelNamespace;
+use DummyModelNamespace{asModel};
 use Dcat\Admin\Http\Controllers\AdminController;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;

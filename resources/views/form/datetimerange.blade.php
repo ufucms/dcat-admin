@@ -1,3 +1,12 @@
+<style type="text/css">
+    .datetime-range-word:before{
+        position: absolute;
+        content: "~";
+        width: 6px;
+        left: -3px;
+        line-height: 2.3;
+    }
+</style>
 <div class="{{$viewClass['form-group']}}">
 
     <label class="{{$viewClass['label']}} control-label">{!! $label !!}</label>
@@ -16,7 +25,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 datetime-range-word">
                 <div class="input-group">
                     <span class="input-group-prepend">
                         <span class="input-group-text bg-white"><i class="feather icon-calendar"></i></span>

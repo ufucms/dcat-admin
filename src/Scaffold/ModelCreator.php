@@ -64,7 +64,7 @@ class ModelCreator
      *
      * @throws \Exception
      */
-    public function create($keyName = 'id', $timestamps = true, $softDeletes = false)
+    public function create($keyName = 'id', $timestamps = true, $softDeletes = false, $fieldData=[])
     {
         $path = $this->getpath($this->name);
         $dir = dirname($path);
@@ -77,6 +77,14 @@ class ModelCreator
             throw new AdminException("Model [$this->name] already exists!");
         }
 
+        $fields = [];
+        foreach ($fieldData as $key => $field) {
+            if (empty($field['name'])) {
+                continue;
+            }
+            $fields[$key] = $field['name'];
+        }
+
         $stub = $this->files->get($this->getStub());
 
         $stub = $this->replaceClass($stub, $this->name)
@@ -84,6 +92,7 @@ class ModelCreator
             ->replaceSoftDeletes($stub, $softDeletes)
             ->replaceDatetimeFormatter($stub)
             ->replaceTable($stub, $this->name)
+            ->replaceFillable($stub, $fields)
             ->replaceTimestamp($stub, $timestamps)
             ->replacePrimaryKey($stub, $keyName)
             ->replaceSpace($stub);
@@ -189,8 +198,8 @@ class ModelCreator
         $import = $use = '';
 
         if (version_compare(app()->version(), '7.0.0') >= 0) {
-            $import = 'use Dcat\\Admin\\Traits\\HasDateTimeFormatter;';
-            $use = 'use HasDateTimeFormatter;';
+            $import = "use Illuminate\Database\Eloquent\Factories\HasFactory;\nuse Dcat\Admin\Traits\HasDateTimeFormatter;\n//use Spatie\EloquentSortable\Sortable;\n//use Spatie\EloquentSortable\SortableTrait;\n//use Stancl\VirtualColumn\VirtualColumn;";
+            $use = "use HasFactory, HasDateTimeFormatter;\n";
         }
 
         $stub = str_replace(['DummyImportDateTimeFormatterTrait', 'DummyUseDateTimeFormatterTrait'], [$import, $use], $stub);
@@ -228,6 +237,23 @@ class ModelCreator
         $table = Str::plural(strtolower($class)) !== $this->tableName ? "protected \$table = '$this->tableName';\n" : '';
 
         $stub = str_replace('DummyModelTable', $table, $stub);
+
+        return $this;
+    }
+
+    /**
+     * Replace Fillable name dummy.
+     *
+     * @param  string  $stub
+     * @param  string  $name
+     * @return $this
+     */
+    protected function replaceFillable(&$stub, $fields)
+    {
+        $fields = implode("', '", $fields);
+        $fillable = "protected \$fillable = ['{$fields}'];\n";
+
+        $stub = str_replace('DummyModelFillable', $fillable, $stub);
 
         return $this;
     }

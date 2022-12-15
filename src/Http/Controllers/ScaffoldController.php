@@ -149,7 +149,8 @@ class ScaffoldController extends Controller
                 $paths['model'] = $modelCreator->create(
                     $request->get('primary_key'),
                     $request->get('timestamps') == 1,
-                    $request->get('soft_deletes') == 1
+                    $request->get('soft_deletes') == 1,
+                    $request->get('fields')
                 );
             }
 
