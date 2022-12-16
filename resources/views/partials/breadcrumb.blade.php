@@ -1,7 +1,7 @@
 @if ($breadcrumb)
     <div class="breadcrumb-wrapper col-12">
     <ol class="breadcrumb float-right text-capitalize">
-        <li class="breadcrumb-item"><a href="{{ admin_url('/') }}"><i class="fa fa-dashboard"></i> {{admin_trans('admin.home')}}</a></li>
+        <li class="breadcrumb-item"><a href="{{ admin_url('/') }}"><i class="fa fa-dashboard"></i> {{admin_trans('admin.dashboard')}}</a></li>
         @foreach($breadcrumb as $item)
             @if($loop->last)
                 <li class="active breadcrumb-item">
@@ -26,7 +26,7 @@
 @elseif(config('admin.enable_default_breadcrumb'))
     <div class="breadcrumb-wrapper col-12">
     <ol class="breadcrumb float-right text-capitalize">
-        <li class="breadcrumb-item"><a href="{{ admin_url('/') }}"><i class="fa fa-dashboard"></i> {{admin_trans('admin.home')}}</a></li>
+        <li class="breadcrumb-item"><a href="{{ admin_url('/') }}"><i class="fa fa-dashboard"></i> {{admin_trans('admin.dashboard')}}</a></li>
         @for($i = 2; $i <= ($len = count(Request::segments())); $i++)
             <li class="breadcrumb-item">
                 @if($i == $len) <a href=""> @endif
