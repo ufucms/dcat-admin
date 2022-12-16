@@ -1,10 +1,12 @@
 @section('content-header')
-    <section class="content-header breadcrumbs-top">
+    <section class="content-header breadcrumbs-top d-flex justify-content-between">
         @if($header || $description)
-            <h1 class=" float-left">
-                <span class="text-capitalize">{!! $header !!}</span>
-                <small>{!! $description !!}</small>
-            </h1>
+            <div>
+                <h1>
+                    <span class="text-capitalize">{!! $header !!}</span>
+                    <small>{!! $description !!}</small>
+                </h1>
+            </div>
         @elseif($breadcrumb || config('admin.enable_default_breadcrumb'))
             <div>&nbsp;</div>
         @endif
