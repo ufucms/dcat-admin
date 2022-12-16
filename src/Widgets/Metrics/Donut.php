@@ -76,7 +76,7 @@ class Donut extends Card
         $this->useChart();
 
         // 默认样式
-        $this->chart->style('margin: 10px 5px 0 0;width: 150px;float:right;');
+        $this->chart->style('width: 100%;');
     }
 
     /**
@@ -103,11 +103,11 @@ class Donut extends Card
         $content = parent::renderContent();
 
         return <<<HTML
-<div class="d-flex row justify-content-between">
+<div class="row">
     <div class="col-sm-{$this->contentWidth[0]} justify-content-center">
         {$content}
     </div>
-    <div class="col-sm-{$this->contentWidth[1]}" style="margin-right: -15px;">
+    <div class="col-sm-{$this->contentWidth[1]} justify-content-center overflow-hidden">
         {$this->renderChart()}
     </div>
 </div>
