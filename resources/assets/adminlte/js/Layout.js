@@ -108,7 +108,7 @@ const Layout = (($) => {
 
       if ($('body').hasClass(ClassName.LAYOUT_FIXED)) {
         if (offset !== false) {
-          $(Selector.CONTENT).css('min-height', (max + offset) - heights.header - heights.footer)
+          $(Selector.CONTENT).css('min-height', (max + offset) - heights.header - heights.footer - 1)
         }
 
         if (typeof $.fn.overlayScrollbars !== 'undefined') {
