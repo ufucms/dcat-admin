@@ -168,7 +168,7 @@ class FixColumns
         $script = <<<'JS'
 
 (function () {
-    var $tableMain = $('.table-main'), minHeight = 600;
+    var $tableMain = $('.table-main'), minHeight = 460;
 
     var theadHeight = $('.table-main thead tr').outerHeight();
     $('.table-fixed thead tr').outerHeight(theadHeight);
@@ -186,7 +186,7 @@ class FixColumns
     if ($tableMain.width() >= $tableMain.prop('scrollWidth') || $(window).width() < 600) {
         $('.table-fixed').hide();
     } else {
-        var height = ($(window).height() - 220);
+        var height = ($(window).height() - 220 - 50);
         height = height < minHeight ? minHeight : height;
 
         $tableMain.each(function (k, v) {
