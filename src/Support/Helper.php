@@ -347,6 +347,40 @@ class Helper
     }
 
     /**
+     * 获取扩展 命名空间
+     * 
+     * @param  string  $name
+     * @param  string  $symbol
+     * @return mixed
+     */
+    public static function space(string $name, string $symbol = '/')
+    {
+        return implode($symbol, array_map(function ($value) {
+            return Str::studly($value);
+        }, explode('.', $name)));
+    }
+
+    /**
+     * @param  string  $name
+     * @param  string  $symbol
+     * @return mixed
+     */
+    public static function path(string $name, string $symbol = '/')
+    {
+        return str_replace('.', $symbol, self::slug($name));
+    }
+
+    /**
+     * 获取扩展目录
+     * 
+     * @return mixed
+     */
+    public static function getExtensionDir()
+    {
+        return substr(config('admin.extension.dir'), strlen(base_path().DIRECTORY_SEPARATOR));
+    }
+
+    /**
      * @param  array  $array
      * @param  int  $level
      * @return string

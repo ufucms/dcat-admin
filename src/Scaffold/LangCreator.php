@@ -35,6 +35,12 @@ class LangCreator
         $controller = str_replace('Controller', '', class_basename($controller));
 
         $filename = $this->getLangPath($controller);
+        $dir = dirname($filename);
+
+        $files = app('files');
+        if (! is_dir($dir)) {
+            $files->makeDirectory($dir, 0755, true);
+        }
         if (is_file($filename)) {
             return;
         }
@@ -62,7 +68,6 @@ class LangCreator
         $content['fields']['created_at'] = admin_trans('admin.created_at');
         $content['fields']['updated_at'] = admin_trans('admin.updated_at');
 
-        $files = app('files');
         if ($files->put($filename, Helper::exportArrayPhp($content))) {
             $files->chmod($filename, 0777);
 
@@ -80,9 +85,9 @@ class LangCreator
     {
         $path = rtrim(app()->langPath(), '/').'/'.App::getLocale();
         if($this->extension){
-            $extension_dir = substr(config('admin.extension.dir'), strlen(base_path().DIRECTORY_SEPARATOR));
-            $extension = strtolower($this->extension);
-            $path = base_path("{$extension_dir}/{$extension}/resources/lang/").App::getLocale();
+            $extension_dir = Helper::getExtensionDir();
+            $paths = Helper::path($this->extension);
+            $path  = base_path("{$extension_dir}/{$paths}/resources/lang/").App::getLocale();
         }
 
         return $path.'/'.Helper::slug($controller).'.php';

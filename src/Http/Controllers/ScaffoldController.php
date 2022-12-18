@@ -135,10 +135,7 @@ class ScaffoldController extends Controller
         $extension = '';
         $extension_id = $request->input('extension_id', 0);
         if($extension_id){
-            $extension_name = Extension::where('id', $extension_id)->value('name');
-            $extension = implode('/', array_map(function ($name) {
-                            return Str::studly($name);
-                        }, explode('.', $extension_name)));
+            $extension = Extension::where('id', $extension_id)->value('name');
         }
 
         try {

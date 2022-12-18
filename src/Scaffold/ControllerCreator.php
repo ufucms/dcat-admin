@@ -40,11 +40,7 @@ class ControllerCreator
     {
         $this->extension = $extension;
 
-        if($this->extension){
-            $this->name = str_replace('\\Controllers\\', '\\Http\\Controllers\\', $name);
-        }else{
-            $this->name = $name;
-        }
+        $this->name = $name;
 
         $this->files = $files ?: app('files');
 
@@ -79,8 +75,7 @@ class ControllerCreator
 
         $language = '';
         if($this->extension){
-            $extension = strtolower(str_replace('/', '.', $this->extension));
-            $language = "{$extension}::" . Helper::slug($slug);
+            $language = "{$this->extension}::" . Helper::slug($slug);
         }
 
         $this->files->put($path, $this->replace($stub, $this->name, $model, $slug, $language));
@@ -167,9 +162,10 @@ class ControllerCreator
     {
         $path = Helper::guessClassFileName($name);
         if($this->extension){
-            $extension_dir = substr(config('admin.extension.dir'), strlen(base_path().DIRECTORY_SEPARATOR));
-            $extension = strtolower($this->extension);
-            $path = str_replace("/{$this->extension}/", "/{$extension_dir}/{$extension}/src/", $path);
+            $extension_dir = Helper::getExtensionDir();
+            $space = Helper::space($this->extension);
+            $paths = Helper::path($this->extension);
+            $path  = str_replace("/{$space}/", "/{$extension_dir}/{$paths}/src/", $path);
         }
         return $path;
     }

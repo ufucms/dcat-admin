@@ -320,8 +320,8 @@
             tpl = $('#table-field-tpl').html(),
             modelNamespace = '{{ str_replace( '\\', '\\\\', $modelNamespace ) }}',
             namespaceBase = '{{ str_replace( '\\', '\\\\', $namespaceBase ) }}',
-            repositoryNamespace = namespaceBase + '\\Repositories\\',
-            controllerNamespace = namespaceBase + '\\Controllers\\',
+            repositoryNamespace = namespaceBase + '\\Http\\Repositories\\',
+            controllerNamespace = namespaceBase + '\\Http\\Controllers\\',
             dataTypeMap = {!! json_encode($dataTypeMap) !!},
             helpers = Dcat.helpers;
 
@@ -330,8 +330,8 @@
                 success: function (data) {
                     if(data.namespaceBase){
                         namespaceBase = data.namespaceBase;
-                        repositoryNamespace = namespaceBase + '\\Repositories\\';
-                        controllerNamespace = namespaceBase + '\\Controllers\\';
+                        repositoryNamespace = namespaceBase + '\\Http\\Repositories\\';
+                        controllerNamespace = namespaceBase + '\\Http\\Controllers\\';
                     }
                     if(data.modelNamespace){
                         modelNamespace = data.modelNamespace;

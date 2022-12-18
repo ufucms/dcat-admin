@@ -38,9 +38,10 @@ class RepositoryCreator
 
         $path = Helper::guessClassFileName($repositoryClass);
         if($this->extension){
-            $extension_dir = substr(config('admin.extension.dir'), strlen(base_path().DIRECTORY_SEPARATOR));
-            $extension = strtolower($this->extension);
-            $path = str_replace("/{$this->extension}/", "/{$extension_dir}/{$extension}/src/Http/", $path);
+            $extension_dir = Helper::getExtensionDir();
+            $space = Helper::space($this->extension);
+            $paths = Helper::path($this->extension);
+            $path  = str_replace("/{$space}/", "/{$extension_dir}/{$paths}/src/", $path);
         }
         $dir = dirname($path);
 
