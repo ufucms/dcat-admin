@@ -70,7 +70,7 @@ class ExtensionMakeCommand extends Command
         'resources/assets/css',
         'resources/assets/js',
         'resources/views',
-        'resources/lang',
+        'resources/lang/zh_CN',
         'src/Models',
         'src/Http/Controllers',
         'src/Http/Controllers/Web',
@@ -137,6 +137,8 @@ class ExtensionMakeCommand extends Command
     ├── updates
     ├── resources
     │   ├── lang
+    │   │   ├── zh_CN
+    │   │   │   └── setting.php
     │   ├── assets
     │   │   ├── css
     │   │   │   └── index.css
@@ -157,6 +159,8 @@ TREE;
     ├── updates
     ├── resources
     │   ├── lang
+    │   │   ├── zh_CN
+    │   │   │   └── setting.php
     │   ├── assets
     │   │   ├── css
     │   │   │   └── index.css
@@ -205,9 +209,10 @@ TREE;
         $this->putFile('composer.json', $composerContents);
 
         // make setting
+        $language = str_replace('/', '.', $this->package);
         $settingContents = str_replace(
-            ['{namespace}'],
-            [$this->namespace],
+            ['{namespace}', '{language}'],
+            [$this->namespace, $language],
             file_get_contents(__DIR__.'/stubs/extension/setting.stub')
         );
         $this->putFile('src/Setting.php', $settingContents);
@@ -326,6 +331,7 @@ TEXT;
             $view = __DIR__.'/stubs/extension/view.stub' => 'resources/views/index.blade.php',
             $js = __DIR__.'/stubs/extension/js.stub'     => 'resources/assets/js/index.js',
             __DIR__.'/stubs/extension/css.stub'          => 'resources/assets/css/index.css',
+            __DIR__.'/stubs/extension/lang/zh_CN/setting.stub' => 'resources/lang/zh_CN/setting.php',
             __DIR__.'/stubs/extension/.gitignore.stub'   => '.gitignore',
             __DIR__.'/stubs/extension/README.md.stub'    => 'README.md',
             __DIR__.'/stubs/extension/version.stub'      => 'version.php',
