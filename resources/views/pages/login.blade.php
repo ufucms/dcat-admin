@@ -21,7 +21,7 @@
     }
 </style>
 
-<div class="login-page bg-40">
+<div class="login-page bg-primary">
     <div class="login-box">
         <div class="login-logo mb-2">
             {{ config('admin.name') }}
