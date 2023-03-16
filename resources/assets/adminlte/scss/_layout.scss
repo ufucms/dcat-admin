@@ -579,9 +579,8 @@ body:not(.sidebar-mini-md) {
 .main-footer {
   background: $main-footer-bg;
   border-top: $main-footer-border-top;
-  //color: lighten($gray-700, 25%);
-  padding: .5rem 1rem;
-  font-size: 90%;
+  color: lighten($gray-700, 25%);
+  padding: .5rem $main-footer-padding;
 
   .text-sm &,
   &.text-sm {
@@ -610,7 +609,6 @@ body:not(.sidebar-mini-md) {
     line-height: 1.8rem;
     margin-bottom: 0;
     padding: 0;
-    font-size: 97%;
 
     .text-sm & {
       line-height: 1.5rem;
@@ -629,5 +627,6 @@ body:not(.sidebar-mini-md) {
   .control-sidebar *,
   .main-footer {
     transition: none !important;
+    animation-duration: 0s !important;
   }
 }

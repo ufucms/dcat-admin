@@ -32,7 +32,7 @@ $colors: map-merge((
 $font-size-root: 1rem !default;
 
 // Sidebar
-//$sidebar-width: $sidebar-width !default;
+$sidebar-width: 250px !default;
 $sidebar-padding-x: 0.5rem !default;
 $sidebar-padding-y: 0 !default;
 
@@ -92,14 +92,14 @@ $main-header-light-placeholder-color: hsla(0, 0%, 0%, 0.6) !default;
 // --------------------------------------------------------
 $main-footer-padding: 1rem !default;
 $main-footer-padding-sm: $main-footer-padding * .812 !default;
-$main-footer-border-top-width: 0 !default;
+$main-footer-border-top-width: 1px !default;
 $main-footer-border-top-color: $gray-300 !default;
 $main-footer-border-top: $main-footer-border-top-width solid $main-footer-border-top-color !default;
 $main-footer-height-inner: (($font-size-root * $line-height-base) + ($main-footer-padding * 2)) !default;
 $main-footer-height: calc(#{$main-footer-height-inner} + #{$main-footer-border-top-width}) !default;
 $main-footer-height-sm-inner: (($font-size-sm * $line-height-base) + ($main-footer-padding-sm * 2)) !default;
 $main-footer-height-sm: calc(#{$main-footer-height-sm-inner} + #{$main-footer-border-top-width}) !default;
-$main-footer-bg: transparent !default;
+$main-footer-bg: $white !default;
 
 // SIDEBAR SKINS
 // --------------------------------------------------------
@@ -140,8 +140,7 @@ $sidebar-dark-submenu-hover-color: $white !default;
 $sidebar-dark-submenu-hover-bg: $sidebar-dark-hover-bg !default;
 $sidebar-dark-submenu-active-color: $white !default;
 $sidebar-dark-submenu-active-bg: transparent !default;
-$sidebar-dark-header-color: hsla(0,0%,100%,.8) !default;
-// #505b6b #49525f
+$sidebar-dark-header-color: $white !default;
 
 // Light sidebar
 $sidebar-light-bg: $white !default;
@@ -163,9 +162,9 @@ $sidebar-tree-item-padding: 5px 10px 7px 25px;
 
 // SIDEBAR MINI
 // --------------------------------------------------------
-$sidebar-mini-width: ($nav-link-padding-x + $sidebar-padding-x + .8rem) * 3 !default;
-$sidebar-nav-icon-width: $sidebar-mini-width - (($sidebar-padding-x + $nav-link-padding-x) * 3) !default;
-$sidebar-user-image-width: $sidebar-nav-icon-width + ($nav-link-padding-x / 3) !default;
+$sidebar-mini-width: ($nav-link-padding-x + $sidebar-padding-x + .8rem) * 2 !default;
+$sidebar-nav-icon-width: $sidebar-mini-width - (($sidebar-padding-x + $nav-link-padding-x) * 2) !default;
+$sidebar-user-image-width: $sidebar-nav-icon-width + ($nav-link-padding-x / 2) !default;
 
 // CONTROL SIDEBAR
 // --------------------------------------------------------

@@ -3,7 +3,6 @@
 //
 
 .btn {
-  border-width: 1px;
   &.disabled,
   &:disabled {
     cursor: not-allowed;
@@ -45,7 +44,7 @@
 // Button color variations
 .btn-default {
   background-color: $button-default-background-color;
-  border-color: $button-default-background-color;
+  border-color: $button-default-border-color;
   color: $button-default-color;
 
   &:hover,

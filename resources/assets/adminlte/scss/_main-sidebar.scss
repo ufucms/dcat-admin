@@ -207,6 +207,9 @@
 
   .nav-link p {
     display: inline-block;
+    animation-name: fadeIn;
+    animation-duration: $transition-speed;
+    animation-fill-mode: both;
     margin: 0;
   }
 }
@@ -227,8 +230,6 @@
   top: 0;
   z-index: $zindex-main-sidebar - 1;
 }
-
-
 
 [class*='sidebar-light-'] {
   // Sidebar background color
@@ -338,7 +339,8 @@
       > .nav-link.active {
         &,
         &:hover {
-          @include sidebar-color($primary)
+          background-color: $sidebar-light-submenu-active-bg;
+          color: $sidebar-light-submenu-active-color;
         }
       }
 
@@ -371,7 +373,7 @@
 
 [class*='sidebar-dark-'] {
   // Sidebar background color
-  //background-color: $sidebar-dark-bg;#7b8b9f
+  background-color: $sidebar-dark-bg;
   background-image: linear-gradient(0deg, lighten($sidebar-dark-bg, 25%), $sidebar-dark-bg);
 
   //.nav .nav-item .nav-link {
@@ -461,7 +463,7 @@
 
     // First Level Submenu
     > .nav-treeview {
-      //background: $sidebar-dark-submenu-bg;
+      background: $sidebar-dark-submenu-bg;
     }
   }
 
@@ -493,7 +495,6 @@
         &:focus {
           background-color: $sidebar-dark-submenu-hover-bg;
           color: $sidebar-dark-submenu-hover-color;
-          font-weight: bold;
         }
       }
 
@@ -501,7 +502,6 @@
         &,
         &:hover,
         &:focus {
-          font-weight: bold;
           background-color: $sidebar-dark-submenu-active-bg;
           color: $sidebar-dark-submenu-active-color;
         }
@@ -530,28 +530,18 @@
   }
 }
 
-// colors
-//.sidebar-dark-white {
-//  .nav-item {
-//    & > .nav-link.active {
-//      background: rgba($white, .8)!important;
-//      box-shadow: none;
-//    }
-//  }
-//}
-.sidebar-light-primary {
-  .nav-item {
-    & > .nav-link.active {
-      @include sidebar-color($primary)
-    }
+// Sidebar variants
+@each $name, $color in $theme-colors {
+  .sidebar-dark-#{$name},
+  .sidebar-light-#{$name} {
+    @include sidebar-color($color)
   }
+}
 
-  .active-bg-light {
-    .nav-item {
-      & > .nav-link.active {
-        @include sidebar-color-snd($primary)
-      }
-    }
+@each $name, $color in $colors {
+  .sidebar-dark-#{$name},
+  .sidebar-light-#{$name} {
+    @include sidebar-color($color)
   }
 }
 
@@ -584,7 +574,7 @@
   }
 
   &:not(.nav-child-indent) {
-    .nav-treeview {
+    .nav-treeview {  
       .nav-item {
         > .nav-link {
           > .nav-icon {
@@ -759,7 +749,7 @@
 
         > .nav-icon {
           margin-left: calc(.55rem - 3px);
-
+          
           .text-sm & {
             margin-left: calc(.75rem - 3px);
           }
@@ -830,7 +820,7 @@
       }
     }
 
-    &.nav-child-indent {
+    &.nav-child-indent {   
       .nav-treeview {
         .nav-treeview {
           padding-left: 0;
@@ -905,13 +895,17 @@
 .nav-collapse-hide-child {
   .menu-open > .nav-treeview {
     max-height: min-content;
-    opacity: 1;
+    animation-name: fadeIn;
+    animation-duration: $transition-speed;
+    animation-fill-mode: both;
   }
 
   .sidebar-collapse & {
     .menu-open > .nav-treeview {
       max-height: 0;
-      opacity: 0;
+      animation-name: fadeOut;
+      animation-duration: $transition-speed;
+      animation-fill-mode: both;
     }
   }
 
@@ -921,7 +915,9 @@
   .sidebar-mini-md.sidebar-collapse .main-sidebar:hover & {
     .menu-open > .nav-treeview {
       max-height: min-content;
-      opacity: 1;
+      animation-name: fadeIn;
+      animation-duration: $transition-speed;
+      animation-fill-mode: both;
     }
   }
 }
@@ -994,5 +990,27 @@
 
   .btn-sidebar:focus {
     background: darken($sidebar-light-bg, 10%);
+  }
+}
+
+// Sidebar inline input-group fix
+.sidebar .form-inline .input-group {
+  width: 100%;
+}
+.sidebar nav .form-inline {
+  margin-bottom: .2rem;
+}
+
+// Sidebar Collapse on Layout Boxed
+
+.layout-boxed {
+  &.sidebar-collapse .main-sidebar {
+    margin-left: 0;
+  }
+  .content-wrapper, 
+  .main-header,
+  .main-footer {
+    z-index: 9999;
+    position: relative;
   }
 }
