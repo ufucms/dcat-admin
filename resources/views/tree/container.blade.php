@@ -1,6 +1,6 @@
 <div class="card-header pb-1 with-border" style="padding:.9rem 1rem">
 
-    <div>
+    <div style="flex: 1 1 auto;">
         <div class="btn-group" style="margin-right:3px">
             <button class="btn btn-primary btn-sm {{ $id }}-tree-tools" data-action="expand">
                 <i class="feather icon-plus-square"></i>&nbsp;<span class="d-none d-sm-inline">{{ trans('admin.expand') }}</span>
@@ -29,7 +29,7 @@
         @endif
     </div>
 
-    <div>
+    <div style="flex: 0 1 auto;">
         {!! $createButton !!}
     </div>
 
