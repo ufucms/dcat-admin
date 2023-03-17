@@ -238,8 +238,8 @@ class Tools implements Renderable
         if (! $this->outline) {
             return $value;
         }
-
-        return preg_replace_callback('/class=[\'|"]([a-z0-9A-Z-_\s]*)[\'|"]/', function ($text) {
+        return $value;
+        /*return preg_replace_callback('/class=[\'|"]([a-z0-9A-Z-_\s]*)[\'|"]/', function ($text) {
             $class = array_filter(explode(' ', $text[1]));
 
             if (
@@ -251,6 +251,6 @@ class Tools implements Renderable
             }
 
             return sprintf('class="%s"', implode(' ', $class));
-        }, $value);
+        }, $value);*/
     }
 }
