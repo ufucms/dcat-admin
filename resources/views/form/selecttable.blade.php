@@ -4,6 +4,9 @@
         @include('admin::form.error')
 
         <div class="input-group">
+            @if ($prepend)
+                <span class="input-group-prepend"><span class="input-group-text bg-white">{!! $prepend !!}</span></span>
+            @endif
             <div {!! $attributes !!}>
                 <span class="default-text" style="opacity:0.75">{{ $placeholder }}</span>
                 <span class="option d-none"></span>

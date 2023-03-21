@@ -97,6 +97,14 @@ class ControllerCreator
         $asModel = " as Model";
         if(stripos($model, 'Repositories') > -1){
             $models = str_replace('Repositories', 'Models', str_replace('Admin\Repositories', 'Models', $model));
+            $models = str_replace([
+                'Admin\Repositories', 
+                'Http\Repositories', 
+                'Repositories'
+                ], [
+                'Models', 
+                'Models', 
+                'Models'], $model);
             $asModel = ";\r\nuse {$models} as Model";
         }
 

@@ -10,6 +10,7 @@ use Illuminate\Support\Arr;
 
 class Select extends Field
 {
+    use PlainInput;
     use CanCascadeFields;
     use CanLoadFields;
     use Sizeable;
@@ -25,6 +26,14 @@ class Select extends Field
      * @var array
      */
     protected $config = [];
+
+    public function __construct($column, $arguments = [])
+    {
+        parent::__construct($column, $arguments);
+        if (static::class === self::class) {
+            $this->prepend('<i class="feather icon-check-circle"></i>');
+        }
+    }
 
     /**
      * Set options.
@@ -224,6 +233,7 @@ class Select extends Field
         $this->formatOptions();
 
         $this->addVariables([
+            'prepend'       => $this->prepend,
             'options'       => $this->options,
             'groups'        => $this->groups,
             'configs'       => $this->config,
@@ -254,7 +264,7 @@ class Select extends Field
     public function placeholder($placeholder = null)
     {
         if ($placeholder === null) {
-            return $this->placeholder ?: $this->label;
+            return $this->placeholder ?: '请选择' . $this->label;
         }
 
         $this->placeholder = $placeholder;

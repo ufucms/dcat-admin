@@ -26,6 +26,9 @@ class SelectTable extends Field
     public function __construct($column, $arguments = [])
     {
         parent::__construct($column, $arguments);
+        if (static::class === self::class) {
+            $this->prepend('<i class="feather icon-check-circle"></i>');
+        }
 
         $this->dialog = DialogTable::make($this->label);
     }
@@ -193,7 +196,7 @@ class SelectTable extends Field
         $this->setUpTable();
         $this->formatOptions();
 
-        $this->prepend('<i class="feather icon-arrow-up"></i>')
+        $this->append('<i class="feather icon-arrow-up"></i>')
             ->defaultAttribute('class', 'form-control '.$this->getElementClassString())
             ->defaultAttribute('type', 'text')
             ->defaultAttribute('name', $this->getElementName());
