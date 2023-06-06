@@ -76,7 +76,7 @@ class Number extends Text
 
     public function render()
     {
-        $this->defaultAttribute('style', 'width: 140px;flex:none');
+        $this->defaultAttribute('style', 'width: 200px;flex:none');
 
         $this->prepend('');
 
