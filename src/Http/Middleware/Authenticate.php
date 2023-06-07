@@ -28,7 +28,7 @@ class Authenticate
             || ! $this->guard->guest()
             || $this->shouldPassThrough($request)
         ) {
-            app('auth')->shouldUse($this->guard->name);
+            app('auth')->shouldUse($this->guard);
 
             return $next($request);
         }
