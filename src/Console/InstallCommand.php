@@ -86,8 +86,8 @@ class InstallCommand extends Command
         $this->makeDir('/');
         $this->line('<info>Admin directory was created:</info> '.str_replace(base_path(), '', $this->directory));
 
-        $this->makeDir('Controllers');
-        $this->makeDir('Metrics/Examples');
+        $this->makeDir('Http/Controllers');
+        $this->makeDir('Http/Metrics/Examples');
 
         $this->createHomeController();
         $this->createAuthController();
@@ -104,14 +104,14 @@ class InstallCommand extends Command
      */
     public function createHomeController()
     {
-        $homeController = $this->directory.'/Controllers/HomeController.php';
+        $homeController = $this->directory.'/Http/Controllers/HomeController.php';
         $contents = $this->getStub('HomeController');
 
         $this->laravel['files']->put(
             $homeController,
             str_replace(
                 ['DummyNamespace', 'MetricsNamespace'],
-                [$this->namespace('Controllers'), $this->namespace('Metrics\\Examples')],
+                [$this->namespace('Http\\Controllers'), $this->namespace('Http\\Metrics\\Examples')],
                 $contents
             )
         );
@@ -125,14 +125,14 @@ class InstallCommand extends Command
      */
     public function createAuthController()
     {
-        $authController = $this->directory.'/Controllers/AuthController.php';
+        $authController = $this->directory.'/Http/Controllers/AuthController.php';
         $contents = $this->getStub('AuthController');
 
         $this->laravel['files']->put(
             $authController,
             str_replace(
                 ['DummyNamespace'],
-                [$this->namespace('Controllers')],
+                [$this->namespace('Http\\Controllers')],
                 $contents
             )
         );
@@ -145,15 +145,15 @@ class InstallCommand extends Command
     public function createMetricCards()
     {
         $map = [
-            '/Metrics/Examples/NewUsers.php'      => 'metrics/NewUsers',
-            '/Metrics/Examples/NewDevices.php'    => 'metrics/NewDevices',
-            '/Metrics/Examples/ProductOrders.php' => 'metrics/ProductOrders',
-            '/Metrics/Examples/Sessions.php'      => 'metrics/Sessions',
-            '/Metrics/Examples/Tickets.php'       => 'metrics/Tickets',
-            '/Metrics/Examples/TotalUsers.php'    => 'metrics/TotalUsers',
+            '/Http/Metrics/Examples/NewUsers.php'      => 'metrics/NewUsers',
+            '/Http/Metrics/Examples/NewDevices.php'    => 'metrics/NewDevices',
+            '/Http/Metrics/Examples/ProductOrders.php' => 'metrics/ProductOrders',
+            '/Http/Metrics/Examples/Sessions.php'      => 'metrics/Sessions',
+            '/Http/Metrics/Examples/Tickets.php'       => 'metrics/Tickets',
+            '/Http/Metrics/Examples/TotalUsers.php'    => 'metrics/TotalUsers',
         ];
 
-        $namespace = $this->namespace('Metrics\\Examples');
+        $namespace = $this->namespace('Http\\Metrics\\Examples');
 
         foreach ($map as $path => $stub) {
             $this->laravel['files']->put(
@@ -173,7 +173,7 @@ class InstallCommand extends Command
      */
     protected function namespace($name = null)
     {
-        $base = str_replace('\\Controllers', '\\', config('admin.route.namespace'));
+        $base = str_replace('Http\\Controllers', '\\', config('admin.route.namespace'));
 
         return trim($base, '\\').($name ? "\\{$name}" : '');
     }
