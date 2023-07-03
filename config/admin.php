@@ -140,7 +140,7 @@ return [
     'auth' => [
         'enable' => true,
 
-        'controller' => App\Admin\Controllers\AuthController::class,
+        'controller' => App\Admin\Http\Controllers\AuthController::class,
 
         'guard' => 'admin',
 
