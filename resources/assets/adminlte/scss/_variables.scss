@@ -162,9 +162,9 @@ $sidebar-tree-item-padding: 5px 10px 7px 25px;
 
 // SIDEBAR MINI
 // --------------------------------------------------------
-$sidebar-mini-width: ($nav-link-padding-x + $sidebar-padding-x + .8rem) * 2 !default;
-$sidebar-nav-icon-width: $sidebar-mini-width - (($sidebar-padding-x + $nav-link-padding-x) * 2) !default;
-$sidebar-user-image-width: $sidebar-nav-icon-width + ($nav-link-padding-x / 2) !default;
+$sidebar-mini-width: ($nav-link-padding-x + $sidebar-padding-x + .8rem) * 2.6 !default;
+$sidebar-nav-icon-width: $sidebar-mini-width - (($sidebar-padding-x + $nav-link-padding-x) * 2.6) !default;
+$sidebar-user-image-width: $sidebar-nav-icon-width + ($nav-link-padding-x / 2.6) !default;
 
 // CONTROL SIDEBAR
 // --------------------------------------------------------
