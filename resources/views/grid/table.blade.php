@@ -9,7 +9,7 @@
 
     {!! $grid->renderHeader() !!}
 
-    <div class="{!! $grid->formatTableParentClass() !!}">
+    <div class="{!! $grid->formatTableParentClass() !!}" id="grid-table-box">
         <table class="{{ $grid->formatTableClass() }}" id="{{ $tableId }}" >
             <thead>
             @if ($headers = $grid->getVisibleComplexHeaders())
