@@ -54,3 +54,19 @@
     {!! $grid->renderPagination() !!}
 
 </div>
+
+
+<script>
+    @if (count($grid->rows()) > 2)
+        Dcat.init("#{{ $tableId }}", function ($this) {
+            $this.find('tbody tr:last td.grid__actions__ .grid-dropdown-actions').removeClass("dropdown").addClass("dropup");
+
+            var tableTr = $("#{{ $tableId }} tbody tr");
+            $("#{{ $tableId }} tbody tr").eq(tableTr.length - 2).find(' td.grid__actions__ .grid-dropdown-actions').removeClass("dropdown").addClass("dropup");
+        });
+    @else
+        Dcat.init("#grid-table-box", function ($this) {
+            $this.css("height", $("#app").height());
+        });
+    @endif
+</script>
