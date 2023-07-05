@@ -1,272 +1,371 @@
-//
-// Component: Dropdown
-//
+// The dropdown menu
+.dropdown{
 
-// General Dropdown Rules
-//.dropdown-item {
-//  &:first-of-type {
-//    @include border-top-radius($border-radius);
-//  }
-//  &:last-of-type {
-//    @include border-bottom-radius($border-radius);
-//  }
-//}
+  // split warning dropdown toggle
+  &.show{
+    .btn-outline-warning,
+    .btn-outline-light{
+      &.dropdown-toggle{
+        color: $white;
+      }
+    }
+  }
+  .btn:not(.btn-sm):not(.btn-lg),
+  .btn:not(.btn-sm):not(.btn-lg).dropdown-toggle {
+    padding: $dropdown-btn-padding-y $dropdown-btn-padding-x;
+    &.btn-round {
+      @include button-round-variant(2rem);
+    }
+  }
 
-.text-sm {
+  .btn.dropdown-toggle.dropdown-toggle-split {
+    padding: $dropdown-btn-padding-y $dropdown-btn-split-padding-x;
+    border-left-color: rgba($white, 0.2) !important;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  [class*="btn-outline-"].dropdown-toggle.dropdown-toggle-split {
+    border-left: 0 !important;
+
+    &:active {
+      color: $white;
+    }
+  }
+
+  // dropdown menu
   .dropdown-menu {
-    font-size: $font-size-sm !important;
-  }
-
-  .dropdown-toggle::after {
-    vertical-align: .2rem
-  }
-}
-
-.dropdown-item-title {
-  font-size: $font-size-base;
-  margin: 0;
-}
-
-.dropdown-icon {
-  &::after {
-    margin-left: 0;
-  }
-}
-
-// Dropdown Sizes
-.dropdown-menu-lg {
-  max-width: 300px;
-  min-width: 280px;
-  padding: 0;
-
-  .dropdown-divider {
-    margin: 0;
-  }
-
-  .dropdown-item {
-    padding: $dropdown-padding-y $dropdown-item-padding-x;
-  }
-
-  p {
-    margin: 0;
-    white-space: normal;
-  }
-}
-
-// Dropdown Submenu
-.dropdown-submenu {
-  position: relative;
-
-  & > a:after {
-    @include caret-right;
-    float: right;
-    margin-left: .5rem;
-    margin-top: .5rem;
-  }
-
-  & > .dropdown-menu {
-    left: 100%;
-    margin-left: 0px;
-    margin-top: 0px;
-    top: 0;
-  }
-}
-
-// Dropdown Hover
-.dropdown-hover {
-  &:hover,
-  &.nav-item.dropdown:hover,
-  .dropdown-submenu:hover,
-  &.dropdown-submenu:hover {
-    > .dropdown-menu {
-      display: block;
-    }
-  }
-}
-
-
-
-// Dropdown Sizes
-.dropdown-menu-xl {
-  max-width: 420px;
-  min-width: 360px;
-  padding: 0;
-
-  .dropdown-divider {
-    margin: 0;
-  }
-
-  .dropdown-item {
-    padding: $dropdown-padding-y $dropdown-item-padding-x;
-  }
-
-  p {
-    margin: 0;
-    white-space: normal;
-  }
-}
-
-// Dropdown header and footer
-.dropdown-footer,
-.dropdown-header {
-  display: block;
-  font-size: $font-size-sm;
-  padding: .5rem $dropdown-item-padding-x;
-  text-align: center;
-}
-
-// Add fade animation to dropdown menus by appending 
-// the class .animated-dropdown-menu to the .dropdown-menu ul (or ol)
-.open:not(.dropup) > .animated-dropdown-menu {
-  @include animation(flipInX .7s both);
-  backface-visibility: visible !important;
-}
-
-@keyframes flipInX {
-  0% {
-    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-    transition-timing-function: ease-in;
-    opacity: 0;
-  }
-
-  40% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-    transition-timing-function: ease-in;
-  }
-
-  60% {
-    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-    opacity: 1;
-  }
-
-  80% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-  }
-
-  100% {
-    transform: perspective(400px);
-  }
-}
-
-// Fix dropdown menu in navbars
-.navbar-custom-menu > .navbar-nav {
-  > li {
-    position: relative;
-    > .dropdown-menu {
+    border: 1px solid rgba($pure-black, .05); // border opacity has been reduced to make it look same as vue's dropdown border [component page, list view page]
+    border-radius: $dropdown-border-radius;
+    transform: scale(1, 0);
+    box-shadow: 0 5px 25px rgba($pure-black, 0.1); // this according to vue version
+    // left: 5px;  // it creates issue in navbar - notification dropdown
+    min-width: 8rem;
+    &::before {
+      content: '';
       position: absolute;
-      right: 0;
-      left: auto;
+      top: -1px;
+      left: 1.2rem;
+      width: .75rem;
+      height: .75rem;
+      display: block;
+      background: $white;
+      transform: rotate(45deg) translate(-7px);
+      border-top: 1px solid rgba($pure-black, .1);
+      border-left: 1px solid rgba($pure-black, .1);
+      z-index: 10;
+      box-sizing: border-box;
     }
-  }
-}
 
-@include media-breakpoint-down(sm) {
-  .navbar-custom-menu > .navbar-nav {
-    float: right;
-    > li {
-      position: static;
-      > .dropdown-menu {
-        position: absolute;
-        right: 5%;
+    &.dropdown-menu-right {
+      &::before {
+        right: .6rem;
         left: auto;
-        border: 1px solid #ddd;
-        background: $white;
+      }
+
+    }
+
+    .dropdown-header {
+      padding: .714rem 1.428rem;
+      margin-top: .714rem;
+    }
+
+    .dropdown-item {
+      padding: .5rem 1rem;
+      color: $body-color;
+      width: auto;
+      cursor: pointer;
+      &:hover{
+        background-color: $body-bg;
+        color: $primary;
+      }
+      &.active {
+        color: $white;
+      }
+
+      &:active {
+        background-color: transparent;
+        color: $dropdown-color;
+      }
+    }
+
+  }
+
+  i {
+    margin-right: 0.5rem;
+  }
+
+  // If don't won't dropdown/up arrow
+  &.no-arrow{
+    .dropdown-toggle{
+      &:after{
+        display: none;
+      }
+      i{
+        margin-right: 0;
+      }
+    }
+  }
+}
+ // same padding for diffrent directions
+ .dropdown,
+ .dropup,
+ .dropright,
+ .dropleft{
+   position: relative;
+  .dropdown-menu{
+    .dropdown-item{
+      padding: .714rem 1.428rem;
+    }
+  }
+ }
+.show {
+  >.dropdown-menu {
+    transform: scale(1, 1);
+    opacity: 1;
+    display: block;
+  }
+}
+
+.dropdown-toggle {
+  // changed icon caret
+
+  &::after {
+    border: none !important;
+    font-family: 'feather';
+    content: "\e842" !important;
+    position: relative;
+    top: 1px;
+    right: 0px;
+    left: .714rem;
+    padding: 0;
+    // left: 1.4rem;
+    margin: 0;
+    vertical-align: 0;
+  }
+
+  &.dropdown-toggle-split {
+    border-left: 1px solid rgba($white, 0.2);
+
+    &:after {
+      left: 0;
+    }
+  }
+
+
+  // hide default arrow to show custom icon DD
+  &.nav-hide-arrow {
+    &::after {
+      display: none;
+    }
+  }
+
+  // Prevent the focus on the dropdown toggle when closing dropdowns
+  &:focus {
+    outline: 0;
+  }
+}
+
+// Color theme active & hover
+.btn-secondary~.dropdown-menu {
+  .dropdown-item {
+    &.active,
+    &:hover {
+      background-color: darken($white, 20%);
+    }
+  }
+}
+
+// DropUp
+.dropup {
+  position: relative;
+  .btn,
+  .btn.dropdown-toggle {
+    padding: $dropdown-btn-padding-y $dropdown-btn-padding-x;
+  }
+  .btn.dropdown-toggle.dropdown-toggle-split {
+    padding: $dropdown-btn-padding-y $dropdown-btn-split-padding-x;
+    border-color: rgba($white, 0.2) !important;
+  }
+  .dropdown-toggle {
+    // changed icon dropup caret
+    &::after {
+      content: "\e845" !important;
+      vertical-align: 0.05rem;
+    }
+  }
+  .dropdown-menu {
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -.714rem;
+      left: 1.214rem;
+      width: .714rem;
+      height: .714rem;
+      display: block;
+      background: $white;
+      transform: rotate(45deg) translate(-7px);
+      border-bottom: 1px solid rgba($pure-black, .1);
+      border-right: 1px solid rgba($pure-black, .1);
+      z-index: 10;
+      box-sizing: border-box;
+    }
+    &.dropdown-menu-right{
+      &::before{
+        left: auto;
+        right: .714rem;
+      }
+    }
+
+  }
+  .dropdown-submenu {
+    .dropdown-menu {
+      bottom: auto;
+      top: 0;
+    }
+  }
+}
+
+
+// DropLeft
+.dropleft {
+  .btn,
+  .btn.dropdown-toggle {
+    padding: $dropdown-btn-padding-y $dropdown-btn-padding-x;
+  }
+  .btn.dropdown-toggle.dropdown-toggle-split {
+    padding: $dropdown-btn-padding-y $dropdown-btn-split-padding-x;
+  }
+  .dropdown-toggle {
+    // changed icon dropup caret
+    &::before {
+      border: none !important;
+      font-family: 'feather';
+      content: "\e843" !important;
+    }
+  }
+  .dropdown-menu {
+    top: -10px;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 1.285rem;
+      right: 0;
+      width: .714rem;
+      height: .714rem;
+      display: block;
+      background: $white;
+      transform: rotate(130deg) translate(-8px);
+      border-top: 1px solid rgba($pure-black, .1);
+      border-left: 1px solid rgba($pure-black, .1);
+      z-index: 10;
+      box-sizing: border-box;
+    }
+  }
+  .dropdown-last{
+    &::before{
+      top: 6rem;
+    }
+  }
+}
+
+// DropRight
+.dropright {
+  .btn,
+  .btn.dropdown-toggle {
+    padding: $dropdown-btn-padding-y $dropdown-btn-padding-x;
+  }
+  .btn.dropdown-toggle.dropdown-toggle-split {
+    padding: $dropdown-btn-padding-y $dropdown-btn-split-padding-x;
+  }
+  .dropdown-toggle {
+    // changed icon dropup caret
+    &::after {
+      border: none !important;
+      font-family: 'feather';
+      content: "\e844" !important;
+    }
+  }
+  .dropdown-menu {
+    top: -10px;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 1.285rem;
+      left: -0.9rem;
+      width: .714rem;
+      height: .714rem;
+      display: block;
+      background: $white;
+      transform: rotate(140deg) translate(-9px);
+      border-bottom: 1px solid rgba($pure-black, .1);
+      border-right: 1px solid rgba($pure-black, .1);
+      z-index: 10;
+      box-sizing: border-box;
+    }
+  }
+  .dropdown-last{
+    &::before{
+      top: 6rem;
+    }
+  }
+}
+
+// Dropdown icon
+.dropdown,
+.dropup {
+  &.dropdown-icon-wrapper {
+    .dropdown-toggle {
+      &:after {
+        display: none;
+      }
+    }
+    .dropdown-menu {
+      min-width: auto;
+      .dropdown-item {
+        padding: 0.5rem 1.1rem;
+        cursor: pointer;
+        i {
+          font-size: 1.3rem;
+          color: $body-color;
+        }
+        &:hover{
+          color: $white;
+        }
       }
     }
   }
 }
 
-// User Menu
-.navbar-nav > .user-menu {
-  > .nav-link:after {
-    content:none;
-  }
-
-  > .dropdown-menu {
-    @include border-top-radius(0);
-    padding: 0;
-    width: 280px;
-
-    &,
-    > .user-body {
-      @include border-bottom-radius(4px);
+  // for white button
+  .btn.btn-white ~ .dropdown-menu {
+    .dropdown-item:not(.acitve):hover{
+    color: $body-color !important;
     }
-
-    // Header menu
-    > li.user-header {
-      height: 175px;
-      padding: 10px;
-      text-align: center;
-
-      // User image
-      > img {
-        z-index: 5;
-        height: 90px;
-        width: 90px;
-        border: 3px solid;
-        border-color: transparent;
-        border-color: rgba(255, 255, 255, 0.2);
-      }
-
-      > p {
-        z-index: 5;
-        font-size: 17px;
-        //text-shadow: 2px 2px 3px #333333;
-        margin-top: 10px;
-
-        > small {
-          display: block;
-          font-size: 12px;
-        }
-      }
+    .dropdown-item.active{
+      color: $body-color;
     }
+}
 
-    // Menu Body
-    > .user-body {
-      @include clearfix;
-      border-bottom: 1px solid $gray-700;
-      border-top: 1px solid $gray-300;
-      padding: 15px;
+// Dropdown menu animation
+.horizontal-menu-wrapper .dropdown-menu,
+.header-navbar .dropdown-menu{
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-name: slideIn;
+}
 
-      a {
-        @include media-breakpoint-up(sm) {
-          background: $white !important;
-          color: $gray-700 !important;
-        }
-      }
-    }
-
-    // Menu Footer
-    > .user-footer {
-      @include clearfix;
-      background-color: $gray-100;
-      padding: 10px;
-
-      .btn-default {
-        color: $gray-600;
-
-        &:hover {
-          @include media-breakpoint-up(sm) {
-            background-color: $gray-100;
-          }
-        }
-      }
-    }
-  }
-
-  .user-image {
-    @include media-breakpoint-up(sm) {
-      float: none;
-      line-height: 10px;
-      margin-right: .4rem;
-      margin-top: -8px;
-    }
-
-    border-radius: 50%;
-    float: left;
-    height: $sidebar-user-image-width;
-    margin-right: 10px;
-    margin-top: -2px;
-    width: $sidebar-user-image-width;
-  }
+@keyframes slideIn {
+ 0% {
+   transform: translateY(1rem);
+   opacity: 0;
+ }
+ 100% {
+   transform:translateY(0rem);
+   opacity: 1;
+ }
+ 0% {
+   transform: translateY(1rem);
+   opacity: 0;
+ }
 }

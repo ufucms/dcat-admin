@@ -25,7 +25,8 @@ const Dropdown = (($) => {
 
   const ClassName = {
     DROPDOWN_HOVER: 'dropdown-hover',
-    DROPDOWN_RIGHT: 'dropdown-menu-right'
+    DROPDOWN_RIGHT: 'dropdown-menu-right',
+    DROPDOWN_LAST: 'dropdown-last'
   }
 
   const Default = {
@@ -62,8 +63,11 @@ const Dropdown = (($) => {
 
       if (elm.length !== 0) {
         if (elm.hasClass(ClassName.DROPDOWN_RIGHT)) {
-          elm.css('left', 'inherit')
-          elm.css('right', 0)
+          elm.css('left', '30px')
+          elm.css('right', '-10px')
+          if(elm.hasClass(ClassName.DROPDOWN_LAST)){
+            elm.css('top', '-' + (elm.height() - 10) +'px')
+          }
         } else {
           elm.css('left', 0)
           elm.css('right', 'inherit')
