@@ -55,12 +55,10 @@
 
 </div>
 
-@if (count($grid->rows()) > 1)
-    <script>
-        (function () {
-            Dcat.init("#{{ $tableId }}", function ($this) {
-                $this.find('tbody tr:last td.grid__actions__ .grid-dropdown-actions .dropdown-menu').addClass("dropdown-last");
-            });
-        })();
-    </script>
-@endif
+<script>
+    (function () {
+        Dcat.init("#{{ $tableId }}", function ($this) {
+            $this.find('tbody tr:last td.grid__actions__ .grid-dropdown-actions .dropdown-menu').addClass("dropdown-last");
+        });
+    })();
+</script>
