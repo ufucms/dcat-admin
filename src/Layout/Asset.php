@@ -17,7 +17,7 @@ class Asset
         // Dcat Admin静态资源路径别名
         '@admin' => 'vendor/dcat-admin',
         // Dcat Acmin扩展静态资源路径别名
-        '@extension' => 'vendor/dcat-admin-extensions',
+        '@extension' => 'vendor/addons',
 
         '@adminlte' => [
             'js' => [
