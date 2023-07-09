@@ -13,7 +13,7 @@
 </style>
 <div class="nav-tabs-custom has-many-{{$columnClass}}">
     <div class="row header">
-        <div class="{{$viewClass['label']}}"><h4 class="pull-right">{!! $label !!}</h4></div>
+        <label class="{{$viewClass['label']}}"><h4 class="pull-right">{!! $label !!}</h4></label>
         <div class="{{$viewClass['field']}}" style="margin-bottom: 5px">
             <div class="add btn btn-outline-primary btn-sm"><i class="feather icon-plus"></i>&nbsp;{{ trans('admin.new') }}</div>
         </div>
